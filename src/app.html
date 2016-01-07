@@ -13,6 +13,10 @@
     
     <h1>{{greetingsCtrl.greeting}}</h1>
     <p>This is {{greetingsCtrl.who | uppercase}} speaking.</p>
+    
+    <div ng-controller="ContentController as contentCtrl">
+      <p>{{contentCtrl.content}}</p>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -24,6 +28,7 @@
     
     <!-- Include My App's JS file(s)-->
     <script src="app.js"></script>
+    <script src="my-module.js"></script>
 
   </body>
 </html>

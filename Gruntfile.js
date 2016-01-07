@@ -3,26 +3,30 @@ module.exports = function(grunt) {
   // Project configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    // Minify, copy and add a banner to specified js file:
-    uglify: {
-      options: {
-        banner: '/** <%= pkg.name %> v<%= pkg.version %> build <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
-      build: {
-        src: 'src/app.js',
-        dest: 'build/app.js'
-      }
-    },
-    // concatenate all vendor js files to build 
+    // Concatenate all vendor scripts to vendor.js and app scripts to app.js 
     concat: {
       options: {},
-      dist: {
+      vendor: {
         src: [
               'bower_components/jquery/dist/jquery.min.js',
               'bower_components/bootstrap/dist/js/bootstrap.min.js',
               'bower_components/angular/angular.min.js'
              ],
         dest: 'build/vendor.js'
+      },
+      app: {
+        src: ['src/**/*.js'],
+        dest: 'build/app.js'
+      }
+    },
+    // Minify and add a banner comment to app js file:
+    uglify: {
+      options: {
+        banner: '/** <%= pkg.name %> v<%= pkg.version %> build <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      },
+      build: {
+        src: '<%= concat.app.dest %>',
+        dest: 'build/app.min.js'
       }
     },
     // Check all js files with jshint:
@@ -59,12 +63,13 @@ module.exports = function(grunt) {
           process: function (content, srcpath) {
             // Remove all html comments
             content = content.replace(/<!--[\s\S]*?-->\s*\n*/g, "");
-            //Remove bower_component script elements
-            content = content.replace(/<script.*\/bower_components\/.*script>\s*\n*/g, "");
             // Change bootstrap css file path
             content = content.replace(/..\/bower_components\/bootstrap\/dist\//g, "");
-            // Add vendor.js before first script tag
-            content = content.replace(/<script/, '<script src="vendor.js"></script>\n<script');
+            // Remove all script elements
+            content = content.replace(/<script.*script>\s*\n*/g, "");
+            // Add concatenated js files just before closing body tag
+            content = content.replace(/<\/body>/, '<script src="vendor.js"></script>\n' +
+                                      '<script src="app.min.js"></script>\n</body>');
             return content;
           }
         }
@@ -73,12 +78,12 @@ module.exports = function(grunt) {
   });
 
   // Load the plugins that provide the grunt tasks
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Default tasks
-  grunt.registerTask('default', ['jshint', 'uglify', 'concat', 'copy']);
+  grunt.registerTask('default', ['concat', 'jshint', 'uglify', 'copy']);
 
 };
