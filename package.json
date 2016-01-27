@@ -1,8 +1,8 @@
 {
-  "name": "temp-app-name",
+  "name": "myApp",
   "version": "0.0.1",
-  "description": "Simple seed template for an angular app.",
-  "author": "developerName",
+  "description": "My first web app",
+  "author": "Juhani Lavonen",
   "license": "ISC",
   "private": true,
   "devDependencies": {

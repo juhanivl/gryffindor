@@ -1,34 +1,299 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap Template</title>
+    <title>Gryffindoge</title>
     <!-- Bootstrap -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <body ng-controller="GreetingsController as greetingsCtrl">
-    
-    <h1>{{greetingsCtrl.greeting}}</h1>
-    <p>This is {{greetingsCtrl.who | uppercase}} speaking.</p>
-    
-    <div ng-controller="ContentController as contentCtrl">
-      <p>{{contentCtrl.content}}</p>
+</head>
+
+<body ng-controller="AjaxCtrl">
+
+
+    <!--NAVBAR-->
+    <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <!-- TODO: VASEMMALLE-->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!--TODO: KESKELLE-->
+                <a class="navbar-brand" href="#">Gryffindoge</a>
+
+                <!--TODO: OIKEALLE-->
+                <button class="btn btn-primary"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span></button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="myNav">
+                <ul class="nav navbar-nav">
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Images
+          		<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" target="_blank"><span>Funny</span></a></li>
+                            <li><a href="#" target="_blank"><span>Art</span></a></li>
+                            <li><a href="#" target="_blank"><span>Travel</span></a></li>
+                            <li><a href="#" target="_blank"><span>Animal</span></a></li>
+                            <li><a href="#" target="_blank"><span>Yms...</span></a></li>
+                        </ul>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Videos
+          		<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" target="_blank"><span>Funny</span></a></li>
+                                <li><a href="#" target="_blank"><span>Art</span></a></li>
+                                <li><a href="#" target="_blank"><span>Travel</span></a></li>
+                                <li><a href="#" target="_blank"><span>Animal</span></a></li>
+                                <li><a href="#" target="_blank"><span>Yms...</span></a></li>
+                            </ul>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Audio
+          		<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" target="_blank"><span>Funny</span></a></li>
+                                    <li><a href="#" target="_blank"><span>Art</span></a></li>
+                                    <li><a href="#" target="_blank"><span>Travel</span></a></li>
+                                    <li><a href="#" target="_blank"><span>Animal</span></a></li>
+                                    <li><a href="#" target="_blank"><span>Yms...</span></a></li>
+                                </ul>
+
+                                <li><a href="#" id="videot">Register</a></li>
+                                <li><a href="#" id="videot">Log in</a></li>
+                                <li><a href="#" id="videot">Setting</a></li>
+                                <li><a href="#" id="videot">Search</a></li>
+
+                </ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--NAVBAR-->
+
+    <!--MODALS-->
+    <!--UPLOAD MEDIA-->
+    <div class="modal fade" id="uploadUpMod" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Upload media give it title and description</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form id="form1">
+                        <img id="blah" src="#" width="150" height="150">
+                        <input id="imgInp" type="file" class="file">
+                        <button id="removebutton" type="button" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                    <br>
+
+                    <textarea class="form-control" rows="1" id="titleinput" placeholder="Title"></textarea>
+                    <br>
+                    <textarea class="form-control" rows="4" id="descriptioninput" placeholder="Description"></textarea>
+                    <hr>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Category
+          		<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" target="_blank"><span>Funny</span></a></li>
+                            <li><a href="#" target="_blank"><span>Art</span></a></li>
+                            <li><a href="#" target="_blank"><span>Travel</span></a></li>
+                            <li><a href="#" target="_blank"><span>Animal</span></a></li>
+                            <li><a href="#" target="_blank"><span>Yms...</span></a></li>
+                        </ul>
+                </div>
+                <div class="modal-footer">
+                    <button id="uploadcheck" type="button" class="btn btn-success">Upload!</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!--SIGN UP-->
+    <div class="modal fade" id="signUpMod" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Type your username, password and email</h4>
+                </div>
+
+                <div class="modal-body">
+                    <input type="text" id="username" placeholder="Username" />
+                    <br>
+                    <input type="password" id="password" placeholder="Password" />
+                    <br>
+                    <input type="password" id="passwordconf" placeholder="Cornfirm Password" />
+                    <br>
+                    <input type="text" id="email" placeholder="Email" />
+                </div>
+
+                <div class="modal-footer">
+                    <button id="alreadyuser" type="button" class="btn btn-primary" data-dismiss="modal">Already a user? Login here!</button>
+                    <button id="signupcheck" type="button" class="btn btn-default">Sign up!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--LOGIN-->
+    <div class="modal fade" id="logInMod" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Type your username and password</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="username" placeholder="Username" />
+                    <br>
+                    <input type="password" id="password" placeholder="Password" />
+                    <br>
+                    <button id="forgotpass" type="button" class="btn btn-forgot" data-dismiss="modal">Forgot password?</button>
+                </div>
+                <div class="modal-footer">
+                    <button id="notuser" type="button" class="btn btn-primary" data-dismiss="modal">Not user? Sign up, here!</button>
+                    <button id="logincheck" type="button" class="btn btn-default">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--SEARCH-->
+    <div class="modal fade" id="searchMod" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Search images based on their titles or on their tags by adding #</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search" id="searchbox">
+                        </div>
+                        <button type="submit" class="btn btn-default" id="submitsearch">Submit</button>
+                    </form>
+                </div>
+                <!--modal-body-->
+            </div>
+            <!--modal-content-->
+        </div>
+        <!--modal-dialog-->
+    </div>
+    <!--modal-fade-->
+
+    <!--FORGOT PASSWORD?!-->
+    <div class="modal fade" id="forgotMod" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Type your username and email to retrieve your password</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="username" placeholder="Username" />
+                    <br>
+                    <input type="password" id="email" placeholder="Email" />
+                </div>
+                <div class="modal-footer">
+                    <button id="forgotcheck" type="button" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--MODAL-->
+
+    <!---CONTENT-->
+
+    <hr>
+    <br>
+    <!--MODAL KOKEILU 
+    <div ng-controller="myCtrl">
+        <p>Input something in the input box:</p>
+        <p>Name :
+            <input type="text" ng-model="name" placeholder="Enter name here">
+        </p>
+        <h1>Hello {{name}}</h1>
+        <br>
+        {{firstName + " " + lastName}}
+
+
+        <h1>Modal example</h1>
+        <button ng-click="toggleModal()" class="btn btn-default">Open modal</button>
+        <modal title="Login form" visible="showModal">
+            <form role="form">
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password" />
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </modal>
+    </div>
+    -->
+
+    <div class="col-md-1">
+        <div class="row" id="content">
+            <h4><b>Title</b></h4>
+            <img src="http://orig11.deviantart.net/672a/f/2016/008/9/9/12390831_592509507567094_6595675938508020669_n_by_osbeltos-d9n81tg.png" class="img-responsive center-block img-thumbnail" alt="image" <p>rating + points</p>
+            <button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+            <button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+            <button class="btn btn-primary"><span class="glyphicon glyphicon-comment"></span></button>
+            <hr>
+        </div>
+    </div>
+
+    
+    <div ng-app='myApp' ng-controller='DemoController'>
+        <div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
+            <img ng-repeat='image in images' ng-src='http://placehold.it/225x250&text={{image}}'>
+            
+        </div>
+    </div>
+
+
+
+
+    <!--CONTENT-->
+
+
+
+
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
     <!-- Include angular files & plugins -->
     <script src="../bower_components/angular/angular.js"></script>
-    
+<script src="ng-infinite-scroll.min.js"></script>
     <!-- Include My App's JS file(s)-->
     <script src="app.js"></script>
-    <script src="my-module.js"></script>
+    <script src="ajaxService.js"></script>
+    <script src="ajaxController.js"></script>
+</body>
 
-  </body>
 </html>
