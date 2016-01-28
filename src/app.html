@@ -256,8 +256,8 @@
 
     <div class="col-md-1">
         <div class="row" id="content">
-            <h4><b>Title</b></h4>
-            <img src="http://orig11.deviantart.net/672a/f/2016/008/9/9/12390831_592509507567094_6595675938508020669_n_by_osbeltos-d9n81tg.png" class="img-responsive center-block img-thumbnail" alt="image" <p>rating + points</p>
+            <h4><b> Title </b></h4>
+            <img src="http://orig11.deviantart.net/672a/f/2016/008/9/9/12390831_592509507567094_6595675938508020669_n_by_osbeltos-d9n81tg.png" class="img-responsive center-block img-thumbnail" alt="image" <p> Rating 4/5 </p>
             <button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></button>
             <button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></button>
             <button class="btn btn-primary"><span class="glyphicon glyphicon-comment"></span></button>
@@ -266,9 +266,17 @@
     </div>
 
     
-    <div ng-app='myApp' ng-controller='DemoController'>
+    <div ng-app='myApp' ng-controller='ImageController'>
         <div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
-            <img ng-repeat='image in images' ng-src='http://placehold.it/225x250&text={{image}}'>
+            <div ng-repeat='image in images' class="row" id="content">
+            <h4><b> &nbsp; &nbsp; {{title}}</b></h4>
+                <img ng-src='http://placehold.it/225x250&text={{image}}' src="http://orig11.deviantart.net/672a/f/2016/008/9/9/12390831_592509507567094_6595675938508020669_n_by_osbeltos-d9n81tg.png" class="img-responsive center-block img-thumbnail" alt="image"> <p>&nbsp; &nbsp; &nbsp;{{rating}}</p>
+            &nbsp;<button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+            &nbsp;<button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+            &nbsp;<button class="btn btn-primary"><span class="glyphicon glyphicon-comment"></span></button>
+            <hr>
+        </div>
+            
             
         </div>
     </div>

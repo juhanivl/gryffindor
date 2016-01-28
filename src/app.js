@@ -1,4 +1,3 @@
-//var app = angular.module('myApp', ['infinite-scroll']);
 var myApp = angular.module('myApp', ['infinite-scroll']);
 /*app.controller('myCtrl', function ($scope) {
 
@@ -12,7 +11,7 @@ var myApp = angular.module('myApp', ['infinite-scroll']);
     
 });*/
 
-myApp.controller('DemoController', function($scope) {
+myApp.controller('ImageController', function($scope) {
   $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
 
   $scope.loadMore = function() {
@@ -21,4 +20,8 @@ myApp.controller('DemoController', function($scope) {
       $scope.images.push(last + i);
     }
   };
+    
+    $scope.title = "Hey this is funny picture"; // Here will be code fetching images title
+    
+    $scope.rating = "Rating 4.5/5"; // Here will be code fetching images rating
 });

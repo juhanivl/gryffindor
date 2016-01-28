@@ -2,7 +2,9 @@
   "name": "myApp",
   "description": "My first web app",
   "authors": [
-    "Juhani Lavonen"
+    "Juhani Lavonen",
+    "Alex Lindroos",
+    "Thanh Binh Tran"
   ],
   "license": "ISC",
   "private": true,
