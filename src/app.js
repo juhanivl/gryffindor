@@ -1,18 +1,53 @@
 var myApp = angular.module('myApp', ['infinite-scroll']);
-/*app.controller('myCtrl', function ($scope) {
+myApp.controller('myCtrl', function ($scope) {
 
     $scope.firstName = "John";
     $scope.lastName = "Doe";
 
-    $scope.showModal = false;
-    $scope.toggleModal = function () {
-        $scope.showModal = !$scope.showModal;
+    $scope.showModalReg = false;
+    $scope.showModalLogin = false;
+    $scope.showModalUpload  = false;
+    
+    
+    $scope.toggleModalReg = function () {
+        $scope.showModalReg = !$scope.showModalReg;
+        
     };
     
-});*/
+     $scope.toggleModalLogin = function () {
+        $scope.showModalLogin = !$scope.showModalLogin;
+        
+    };
+    
+    $scope.toggleAllModals = function () {
+        if ($scope.showModalReg || $scope.showModalLogin === true) {
+            $scope.showModalLogin = false;
+            $scope.showModalReg = false;
+            $scope.showModalUpload = false;
+        }
+    };
+    
+     $scope.toggleModalUpload = function () {
+        $scope.showModalUpload  = !$scope.showModalUpload ;
+        
+    };
+    
+            $scope.setImageFile = function (element) {
+            // Get the image data from element
+            //Start to put the file into canvas element
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $scope.image.src = e.target.result;
+            };
+            reader.readAsDataURL(element.files[0]);
+            $scope.image.onload = $scope.resetImage;
+        };
+             
+});
 
 myApp.controller('ImageController', function($scope) {
-  $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
+  
+    $scope.images = [1, 2, 3, 4, 5, 6, 7, 8]; 
 
   $scope.loadMore = function() {
     var last = $scope.images[$scope.images.length - 1];
