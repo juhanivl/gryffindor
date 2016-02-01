@@ -9,6 +9,7 @@
     <title>Gryffindoge</title>
     <!-- Bootstrap -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="search.css" rel="stylesheet">
 </head>
 
 <body ng-controller="myCtrl">
@@ -30,9 +31,18 @@
                 <a class="navbar-brand" href="#">Gryffindoge</a>
 
                 <!--TODO: OIKEALLE-->
-                <button class="btn btn-primary"><span class="glyphicon glyphicon-upload" aria-hidden="true" ng-click="toggleModalUpload()"></span></button>
-            </div>
+                <!--button class="btn btn-primary"><span class="glyphicon glyphicon-upload" aria-hidden="true" ng-click="toggleModalUpload()"></span></button>
+            </div-->
 
+            <!-- SEARCH BUTTON --->
+                
+            <form class ="search-container" action="">
+                <input id="search-box" type="text" class="search-box" name="q"/>
+                <label for="search-box"><span class="glyphicon glyphicon-search search-icon"></span></label>
+                <input type="submit" id="search-submit" />
+                </form>
+                
+                
             <div class="collapse navbar-collapse" id="myNav">
                 <ul class="nav navbar-nav">
 
@@ -73,6 +83,7 @@
                                 <li><a href="#" id="videot"  ng-click="toggleModalLogin()"  data-toggle="collapse" data-target="#myNav">Log in</a>                                     </li>
                                 <li><a href="#" id="videot">Setting</a></li>
                                 <li><a href="#" id="videot">Search</a></li>
+                                <li><a href="#" id="videot" ng-click="toggleModalUpload()" data-toggle="collapse" data-target="#myNav">Upload</a></li>
                 </ul>
                 </ul>
             </div>
@@ -196,6 +207,7 @@
     <script src="app.js"></script>
     <script src="ajaxService.js"></script>
     <script src="ajaxController.js"></script>
+    <script src="search.js"></script>
     
 </body>
 

@@ -20,7 +20,7 @@ myApp.controller('myCtrl', function ($scope) {
     };
     
     $scope.toggleAllModals = function () {
-        if ($scope.showModalReg || $scope.showModalLogin === true) {
+        if ($scope.showModalReg || $scope.showModalLogin === true || $scope.showModalUpload === true) {
             $scope.showModalLogin = false;
             $scope.showModalReg = false;
             $scope.showModalUpload = false;
