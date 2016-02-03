@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['infinite-scroll']);
+var myApp = angular.module('myApp', []);
 myApp.controller('myCtrl', function ($scope) {
 
     $scope.firstName = "John";

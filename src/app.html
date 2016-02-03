@@ -9,7 +9,7 @@
     <title>Gryffindoge</title>
     <!-- Bootstrap -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="search.css" rel="stylesheet">
+    <link href="css/search.css" rel="stylesheet">
 </head>
 
 <body ng-controller="myCtrl">
@@ -20,30 +20,23 @@
     <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <!-- TODO: VASEMMALLE-->
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNav" ng-click="toggleAllModals()">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <!--TODO: KESKELLE-->
-                <a class="navbar-brand" href="#">Gryffindoge</a>
-
-                <!--TODO: OIKEALLE-->
-                <!--button class="btn btn-primary"><span class="glyphicon glyphicon-upload" aria-hidden="true" ng-click="toggleModalUpload()"></span></button>
-            </div-->
-
+                
             <!-- SEARCH BUTTON --->
                 
-            <form class ="search-container" action="">
+            <form class ="search-container pull-right" action="">
                 <input id="search-box" type="text" class="search-box" name="q"/>
                 <label for="search-box"><span class="glyphicon glyphicon-search search-icon"></span></label>
                 <input type="submit" id="search-submit" />
                 </form>
                 
+                <!-- TODO: VASEMMALLE-->
+                <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#myNav" ng-click="toggleAllModals()">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 
-            <div class="collapse navbar-collapse" id="myNav">
+                <div class="collapse navbar-collapse" id="myNav">
                 <ul class="nav navbar-nav">
 
                     <li class="dropdown">
@@ -82,11 +75,16 @@
                                 <li><a href="#" id="videot" ng-click="toggleModalReg()"  data-toggle="collapse" data-target="#myNav">Register</a>                                   </li>
                                 <li><a href="#" id="videot"  ng-click="toggleModalLogin()"  data-toggle="collapse" data-target="#myNav">Log in</a>                                     </li>
                                 <li><a href="#" id="videot">Settings</a></li>
-                                <li><a href="#" id="videot"  ng-click="toggleModalImage()"  data-toggle="collapse" data-target="#myNav">Search</a></li>
+                                <li><a href="#" id="videot">Search</a></li>
                                 <li><a href="#" id="videot" ng-click="toggleModalUpload()" data-toggle="collapse" data-target="#myNav">Upload</a></li>
                 </ul>
                 </ul>
             </div>
+
+
+                
+                
+            
 <!--- Register modal-->
                     <modal title="Register form" id="regModal" ng-show="showModalReg">
                     <form role="form">
@@ -143,22 +141,6 @@
             </modal>
                      
             
-<!--- ImageView modal-->
-            
-                    <modal title="ImageView" id="imageModal" ng-show="showModalImage">
-                         <img src="https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c.jpeg" class="img-responsive center-block img-thumbnail" alt="image2">
-                        <form role="form">
-          
-        <!--canvas id="myCanvas" style="width: 50%;">
-    
-        </canvas-->
-     <div class="form-group">
-         <label for="title">Comments</label>
-                    <input type="text" class="form-control" id="comments" placeholder="Comments" />
-          </div>
-
-                        
-                    </modal>
         
         </div>
     </nav>
@@ -179,43 +161,33 @@
     <div class="col-md-1" ng-controller="AjaxCtrl">
         <div class="row" id="content">
             
-            <!--IMAGEVIEW-->
+    <!--IMAGEVIEW-->
             <modal title="Image View" id="imageViewModal" ng-show="showModalImageView">
                 <div>
-                    <h4><b> &nbsp; &nbsp; {{file.title}}</b></h4>
-                     <img ng-src="http://util.mw.metropolia.fi/uploads/{{ file.path }}" class="img-responsive center-block img-thumbnail" alt="imagee">
+                    <h4><b> &nbsp; &nbsp; {{title}}</b></h4>
+                     <img ng-src="{{path}}" class="img-responsive center-block img-thumbnail" alt="imagee">
                     <hr>
-                    <p>Comments</p>
+                    <p>Comments {{file.path}}</p>
                 </div>
             </modal>
+            
+<!-- IMAGE FEED -->
             
             <div ng-repeat="file in files" class="row" id="content">
                  <h4><b> &nbsp; &nbsp; {{file.title}}</b></h4>
         <img ng-src="http://util.mw.metropolia.fi/uploads/{{ file.path }}" class="img-responsive center-block img-thumbnail" alt="image">
      <p>&nbsp; &nbsp; &nbsp;{{rating}}</p>
             <p>This is images url: http://util.mw.metropolia.fi/uploads/{{ file.path }}</p>
+                <p>{{file.fileId}}</p>
             <button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></button>
             <button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></button>
-            <button class="btn btn-primary" ng-click="toggleModalImageView()"><span class="glyphicon glyphicon-comment"></span></button>
+            <button class="btn btn-primary" ng-click="toggleModalImageView(file.path,file.title)"><span class="glyphicon glyphicon-comment"></span></button>
             <hr>
         </div>
+            
     </div>
         </div>
     
-    <!--div ng-app='myApp' ng-controller='ImageController'>
-        <div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
-            <div ng-repeat='image in images' class="row" id="content">
-            <h4><b> &nbsp; &nbsp; {{title}}</b></h4>
-                <img ng-src="http://util.mw.metropolia.fi/uploads/{{ file.path }}" class="img-responsive center-block img-thumbnail" alt="image"> <p>&nbsp; &nbsp; &nbsp;{{rating}}</p>
-            &nbsp;<button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-            &nbsp;<button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></button>
-            &nbsp;<button class="btn btn-primary"><span class="glyphicon glyphicon-comment"></span></button>
-            <hr>
-        </div>
-            
-            
-        </div>
-    </div-->
 
 
 
@@ -233,12 +205,13 @@
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Include angular files & plugins -->
     <script src="../bower_components/angular/angular.js"></script>
-<script src="ng-infinite-scroll.min.js"></script>
     <!-- Include My App's JS file(s)-->
-    <script src="app.js"></script>
-    <script src="ajaxService.js"></script>
-    <script src="ajaxController.js"></script>
-    <script src="search.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="directives/ajaxService.js"></script>
+    <script src="controllers/ajaxController.js"></script>
+    <script src="scripts/search.js"></script>
+    <script src="scripts/my-module.js"</script>
+    <script src="directives/getFileById.js"</script>
     
 </body>
 

@@ -1,3 +1,12 @@
+#imageViewModal{
+    position:fixed;
+    z-index: +1;
+    background-color: darkgray;
+    margin-right:5%;
+    padding:5%;
+    
+}
+
 body {
   margin: 5%;
 }
