@@ -17,7 +17,7 @@
 
     <!--NAVBAR-->
     <div ng-controller="myCtrl"> 
-    <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
+    <nav class="navbar navbar-default navbar-fixed-top" id="navbar" style="background-color: {{ giveColor() }}">
         <div class="container-fluid">
             <div class="navbar-header">
                 
@@ -73,8 +73,8 @@
                                 </ul>
                              
                                 <li><a href="#" id="videot" ng-click="toggleModalReg()"  data-toggle="collapse" data-target="#myNav">Register</a>                                   </li>
-                                <li><a href="#" id="videot"  ng-click="toggleModalLogin()"  data-toggle="collapse" data-target="#myNav">Log in</a>                                     </li>
-                                <li><a href="#" id="videot">Settings</a></li>
+                                <li><a href="#" id="videot" ng-click="toggleModalLogin()"  data-toggle="collapse" data-target="#myNav">Log in</a>                                     </li>
+                                <li><a href="#" id="videot" ng-click="toggleModalSettings()" data-toggle="collapse" data-target="#myNav">Settings</a></li>
                                 <li><a href="#" id="videot">Search</a></li>
                                 <li><a href="#" id="videot" ng-click="toggleModalUpload()" data-toggle="collapse" data-target="#myNav">Upload</a></li>
                 </ul>
@@ -87,7 +87,7 @@
             
 <!--- Register modal-->
                     <modal title="Register form" id="regModal" ng-show="showModalReg">
-                    <form role="form">
+                    <!--form role="form">
                     <div class="form-group">
                     <label for="Username">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Username" />
@@ -105,8 +105,11 @@
                     <input type="email" class="form-control" id="email" placeholder="Enter email" />
                     </div>
                     <button type="submit" class="btn btn-default" ng-click="toggleModalReg()" >Submit</button>
-                    <!--button type="submit" class="btn btn-default" ng-click="toggleModalLogin()" >Already a user? Login here!</button-->
-                    </form>
+                    <!--button type="submit" class="btn btn-default" ng-click="toggleModalLogin()" >Already a user? Login here!</button>
+                    </form-->
+                    <div ng-controller="RegisterController">
+                        <register-form></register-form>
+                        </div>
                     </modal>
  <!--- Login modal-->       
                     <modal title="Login form" id="loginModal" ng-show="showModalLogin">
@@ -139,6 +142,18 @@
             <button id="submit" type="submit" class="btn btn-success" ng-click="toggleModalUpload()" ng-submit="register()">Upload</button>
             </form>
             </modal>
+<!-- Settings modal -->
+                    <modal title="Settings" id="settingsModal" ng-show="showModalSettings">
+                    <form role="form">
+                    <div class="form-group">
+                    <label for="color">Choose your favorite color to customize the application.</label>
+                    <button type="submit" class="btn btn-default" ng-click="toggleColorRed()">Red</button>
+                    <button type="submit" class="btn btn-default" ng-click="toggleColorBlue()">Blue</button>
+                    <button type="submit" class="btn btn-default" ng-click="toggleColorYellow()">Yellow</button>
+                    </div>
+                    <button type="submit" class="btn btn-default" ng-click="toggleModalSettings()" >Done</button>
+                    </form>
+                    </modal>
                      
             
         
@@ -208,10 +223,13 @@
     <!-- Include My App's JS file(s)-->
     <script src="scripts/app.js"></script>
     <script src="directives/ajaxService.js"></script>
+    <script src="directives/ajaxService2.js"></script>
     <script src="controllers/ajaxController.js"></script>
     <script src="scripts/search.js"></script>
     <script src="scripts/my-module.js"</script>
     <script src="directives/getFileById.js"</script>
+    <script src="registerController.js"></script>
+    <script src="registerForm.js"></script>
     
 </body>
 

@@ -1,13 +1,11 @@
 var myApp = angular.module('myApp', []);
 myApp.controller('myCtrl', function ($scope) {
 
-    $scope.firstName = "John";
-    $scope.lastName = "Doe";
-
     $scope.showModalReg = false;
     $scope.showModalLogin = false;
     $scope.showModalUpload  = false;
     $scope.showModalImageView = false;
+    $scope.showModalSettings = false;
     
     $scope.toggleModalReg = function () {
         $scope.showModalReg = !$scope.showModalReg;
@@ -20,10 +18,11 @@ myApp.controller('myCtrl', function ($scope) {
     };
     
     $scope.toggleAllModals = function () {
-        if ($scope.showModalReg || $scope.showModalLogin === true || $scope.showModalUpload === true) {
+        if ($scope.showModalReg || $scope.showModalLogin === true || $scope.showModalUpload === true || $scope.showModalSettings === true ) {
             $scope.showModalLogin = false;
             $scope.showModalReg = false;
             $scope.showModalUpload = false;
+            $scope.showModalSettings = false;
         }
     };
     
@@ -31,6 +30,65 @@ myApp.controller('myCtrl', function ($scope) {
         $scope.showModalUpload  = !$scope.showModalUpload ;
         
     };
+    
+    $scope.toggleModalSettings = function(){
+        $scope.showModalSettings = !$scope.showModalSettings;
+    };
+    
+    var active = false;
+    var active2 = false;
+    var active3 = false;
+   
+    var color = '#8FD8D8';
+    var color2 = '#FF3030';
+    var color3 = '#FFFF00';
+    
+    
+    $scope.toggleColorBlue = function(){
+      
+      active = !active;
+      active2 = false;
+      active3 = false;
+    };
+    
+     $scope.toggleColorRed = function(){
+      
+      active2 = !active2;
+      active = false;
+      active3 = false;
+    };
+    
+     $scope.toggleColorYellow = function(){
+      
+      active3 = !active3;
+      active = false;
+      active2 = false;
+    };
+    
+   
+    $scope.giveColor = function () {
+      if (active) { 
+         return color;
+      }else if (active2) {
+          return color2;
+    }else if (active3){
+        return color3;
+    }
+    };
+    
+       $scope.giveColor2 = function () {
+      if (active) { 
+         return color2;
+      }
+    };
+    
+       $scope.giveColor3 = function () {
+      if (active) { 
+         return color3;
+      }
+    };
+    
+
     
 
     $scope.user = {
