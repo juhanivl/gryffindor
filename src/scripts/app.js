@@ -17,18 +17,10 @@ myApp.controller('myCtrl', function ($scope) {
         $scope.showModalLogin = !$scope.showModalLogin;
 
     };
-
-    $scope.toggleAllModals = function () {
-        if ($scope.showModalReg || $scope.showModalLogin === true || $scope.showModalUpload === true || $scope.showModalSettings === true) {
-            $scope.showModalLogin = false;
-            $scope.showModalReg = false;
-            $scope.showModalUpload = false;
-            $scope.showModalSettings = false;
-            $scope.showModalEdit = false;
-        }
-    };
-
+    
+    
     $scope.toggleModalUpload = function () {
+       // $window.location.href = 'http://127.0.0.1:62246/src/app.html#';
         $scope.showModalUpload = !$scope.showModalUpload;
 
     };
@@ -40,6 +32,17 @@ myApp.controller('myCtrl', function ($scope) {
     $scope.toggleModalSettings = function () {
         $scope.showModalSettings = !$scope.showModalSettings;
     };
+
+    $scope.toggleAllModals = function () {
+        if ($scope.showModalReg || $scope.showModalLogin === true || $scope.showModalUpload === true || $scope.showModalSettings === true || $scope.showModalEdit === true) {
+            $scope.showModalLogin = false;
+            $scope.showModalReg = false;
+            $scope.showModalUpload = false;
+            $scope.showModalSettings = false;
+            $scope.showModalEdit = false;
+        }
+    };
+
 
     var active = false;
     var active2 = false;
@@ -104,10 +107,10 @@ myApp.controller('myCtrl', function ($scope) {
         type: ''
     };
 
-    $scope.register = function () {
-        console.log('User clicked register', $scope.user);
+ /*   $scope.register = function () {
+        $window.location.href = 'http://127.0.0.1:62246/src/app.html#';
     };
-
+*/
 });
 
 

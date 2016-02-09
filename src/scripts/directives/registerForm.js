@@ -3,6 +3,6 @@ angular.module('myApp')
         return {
             replace: true,
             restrict: 'E',
-            templateUrl: 'registerForm.html'
+            templateUrl: 'views/registerForm.html'
         };
     });
