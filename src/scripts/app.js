@@ -1,5 +1,5 @@
 var myApp = angular.module('myApp', []);
-myApp.controller('myCtrl', function ($scope) {
+myApp.controller('myCtrl', function ($scope, $http) {
 
     $scope.showModalReg = false;
     $scope.showModalLogin = false;
@@ -17,10 +17,9 @@ myApp.controller('myCtrl', function ($scope) {
         $scope.showModalLogin = !$scope.showModalLogin;
 
     };
-    
-    
+
+
     $scope.toggleModalUpload = function () {
-       // $window.location.href = 'http://127.0.0.1:62246/src/app.html#';
         $scope.showModalUpload = !$scope.showModalUpload;
 
     };
@@ -107,30 +106,66 @@ myApp.controller('myCtrl', function ($scope) {
         type: ''
     };
 
- /*   $scope.register = function () {
-        $window.location.href = 'http://127.0.0.1:62246/src/app.html#';
+    $scope.setMediaFile = function (element) {
+        $scope.mimeType = element.files[0].type;
+        $scope.type = $scope.mimeType.substr(0, 5);
     };
-*/
+
+    $scope.sendImage = function () {
+        var fd = new FormData(document.getElementById('fileForm'));
+        fd.append('user', 6);
+        fd.append('type', $scope.type);
+        fd.append('mime-type', $scope.mimeType);
+        var request = $http.post('http://util.mw.metropolia.fi/ImageRekt/api/v2/upload', fd, {
+            transformRequest: angular.identity,
+            headers: {
+                'Content-Type': undefined
+            }
+        });
+
+        request.then(function (response) {
+            console.log(response);
+            alert("Uploaded successfully!");
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    
+    $scope.getMediaUrl = function(url){
+        return $sce.trustAsResourceUrl(url);
+    };
+    
 });
 
 
-myApp.controller('ImageController', function ($scope) {
-
-    $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
-
-    $scope.loadMore = function () {
-        var last = $scope.images[$scope.images.length - 1];
-        for (var i = 1; i <= 8; i++) {
-            $scope.images.push(last + i);
-        }
-    };
 
 
-});
+angular.module('myApp')
+    .controller('MainCtrl', function ($scope, $http) {
 
 
-myApp.controller('MainCtrl', function ($scope) {
-        // your friend: console.log();    
+
+        $scope.sendImage = function () {
+            var fd = new FormData(document.getElementById('uploadForm'));
+            fd.append('user', 6);
+            fd.append('type', "image");
+            fd.append("file", dataURItoBlob($scope.canvas.toDataURL()));
+            var request = $http.post('http://util.mw.metropolia.fi/ImageRekt/api/v2/upload', fd, {
+                transformRequest: angular.identity,
+                headers: {
+                    'Content-Type': undefined
+                }
+            });
+
+            request.then(function (response) {
+                console.log(response);
+            }, function (error) {
+                console.log(error);
+            });
+        };
+
+
+
 
         $scope.setImageFile = function (element) {
             // get the image file from element
@@ -273,6 +308,28 @@ myApp.controller('MainCtrl', function ($scope) {
             var imgAsDataUrl = $scope.canvas.toDataURL('image/png');
             $scope.url = imgAsDataUrl;
         };
+
+        function dataURItoBlob(dataURI) {
+            // convert base64/URLEncoded data component to raw binary data held in a string
+            var byteString;
+            if (dataURI.split(',')[0].indexOf('base64') >= 0)
+                byteString = atob(dataURI.split(',')[1]);
+            else
+                byteString = unescape(dataURI.split(',')[1]);
+
+            // separate out the mime component
+            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+            // write the bytes of the string to a typed array
+            var ia = new Uint8Array(byteString.length);
+            for (var i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+
+            return new Blob([ia], {
+                type: mimeString
+            });
+        }
     })
     .config(function ($compileProvider) {
         $compileProvider.aHrefSanitizationWhitelist(/ˆ\s*(https?|ftp|mailto|coui|data):/);

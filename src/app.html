@@ -29,6 +29,7 @@
                         <input type="submit" id="search-submit" />
                     </form>
 
+
                     <!-- TODO: VASEMMALLE-->
                     <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#myNav" ng-click="toggleAllModals()">
                         <span class="icon-bar"></span>
@@ -40,44 +41,22 @@
                 <div class="collapse navbar-collapse" id="myNav">
                     <ul class="nav navbar-nav">
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Images
-          		<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" target="_blank"><span>Funny</span></a></li>
-                                <li><a href="#" target="_blank"><span>Art</span></a></li>
-                                <li><a href="#" target="_blank"><span>Travel</span></a></li>
-                                <li><a href="#" target="_blank"><span>Animal</span></a></li>
-                                <li><a href="#" target="_blank"><span>Yms...</span></a></li>
-                            </ul>
+                        <li><a href="#" id="videot" data-toggle="collapse" data-target="#myNav">Images</a> </li>
 
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Videos
-          		<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#" target="_blank"><span>Funny</span></a></li>
-                                    <li><a href="#" target="_blank"><span>Art</span></a></li>
-                                    <li><a href="#" target="_blank"><span>Travel</span></a></li>
-                                    <li><a href="#" target="_blank"><span>Animal</span></a></li>
-                                    <li><a href="#" target="_blank"><span>Yms...</span></a></li>
-                                </ul>
 
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Audio
-          		<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#" target="_blank"><span>Funny</span></a></li>
-                                        <li><a href="#" target="_blank"><span>Art</span></a></li>
-                                        <li><a href="#" target="_blank"><span>Travel</span></a></li>
-                                        <li><a href="#" target="_blank"><span>Animal</span></a></li>
-                                        <li><a href="#" target="_blank"><span>Yms...</span></a></li>
-                                    </ul>
+                        <li><a href="#" id="videot" data-toggle="collapse" data-target="#myNav">Videos</a> </li>
 
-                                    <li><a href="#" id="videot" ng-click="toggleModalReg()" data-toggle="collapse" data-target="#myNav">Register</a> </li>
-                                    <li><a href="#" id="videot" ng-click="toggleModalLogin()" data-toggle="collapse" data-target="#myNav">Log in</a> </li>
-                                    <li><a href="#" id="videot" ng-click="toggleModalSettings()" data-toggle="collapse" data-target="#myNav">Settings</a></li>
-                                    <li><a href="#" id="videot" ng-click="toggleModalEdit()" data-toggle="collapse" data-target="#myNav">Image Editor</a></li>
-                                    <li><a href="#" id="videot" ng-click="toggleModalUpload()" data-toggle="collapse" data-target="#myNav">Upload</a></li>
+
+                        <li><a href="#" id="videot" data-toggle="collapse" data-target="#myNav">Audio</a> </li>
+
+
+                        <li><a href="#" id="videot" ng-click="toggleModalReg()" data-toggle="collapse" data-target="#myNav">Register</a> </li>
+                        <li><a href="#" id="login-navbar" ng-click="toggleModalLogin()" data-toggle="collapse" data-target="#myNav">Log in</a> </li>
+                        <li><a href="#" id="account-navbar" data-toggle="collapse" data-target="#myNav" style="display:none">My Account</a></li>
+                        <li><a href="#" id="logout-navbar" data-toggle="collapse" data-target="#myNav" style="display:none">Log out</a></li>
+                        <li><a href="#" id="videot" ng-click="toggleModalSettings()" data-toggle="collapse" data-target="#myNav">Settings</a></li>
+                        <li><a href="#" id="videot" ng-click="toggleModalEdit()" data-toggle="collapse" data-target="#myNav">Image Editor</a></li>
+                        <li><a href="#" id="videot" ng-click="toggleModalUpload()" data-toggle="collapse" data-target="#myNav">Upload</a></li>
                     </ul>
                     </ul>
                 </div>
@@ -91,7 +70,7 @@
         <!--- Register modal-->
         <modal title="Register form" id="regModal" ng-show="showModalReg">
             <h4>Register</h4>
-            <button ng-click="toggleModalRegister()" type="button" class="close" data-dismiss="modal">&times;</button>
+            <button ng-click="toggleModalReg()" type="button" class="close" data-dismiss="modal">&times;</button>
             <div ng-controller="RegisterController">
                 <register-form></register-form>
             </div>
@@ -100,37 +79,24 @@
         <modal title="Login form" id="loginModal" ng-show="showModalLogin">
             <h4>Login</h4>
             <button ng-click="toggleModalLogin()" type="button" class="close" data-dismiss="modal">&times;</button>
-            <form role="form">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Enter username" />
+            <div ng-controller="LoginController">
+            <login-form></login-form>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password" />
-                </div>
-                <button type="submit" class="btn btn-default" ng-click="toggleModalLogin()">Login</button>
-                <!--button type="submit" class="btn btn-default" ng-click="toggleModalReg()">Not a user? Register here!</button-->
-            </form>
         </modal>
 
         <!--- Upload modal-->
         <modal title="Upload form" id="uploadModal" ng-show="showModalUpload">
             <h4>Upload</h4>
             <button ng-click="toggleModalUpload()" type="button" class="close" data-dismiss="modal">&times;</button>
-            <form id="uploadform" method="post" action="http://util.mw.metropolia.fi/ImageRekt/api/v2/upload" enctype="multipart/form-data">
-                <input id="fileId" type="file" name="file" class="file">
-                <br>
-                <textarea class="form-control" id="user" name="user" placeholder="User" ng-model="user.username"></textarea>
-                <br>
-                <textarea class="form-control" id="title" name="title" placeholder="Title" ng-model="user.title"></textarea>
-                <br>
-                <textarea class="form-control" id="description" name="description" placeholder="Description" ng-model="user.description"></textarea>
-                <br>
-                <textarea class="form-control" id="type" name="type" placeholder="Type image/audio/video" ng-model="user.type"></textarea>
-                <br>
-                <button id="submit" type="submit" class="btn btn-success" ng-click="toggleModalUpload()" ng-submit="register()">Upload</button>
+
+            <form id="fileForm">
+                <input name="file" type="file" onchange="angular.element(this).scope().setMediaFile(this)">
+                <input name="username" type="text" placeholder="Username">
+                <input name="title" type="text" placeholder="Title">
+                <input name="description" type="text" placeholder="Description">
+                <button ng-click="sendImage()">Upload</button>
             </form>
+
         </modal>
 
 
@@ -167,6 +133,8 @@
                         </div>
                     </div>
 
+                    <hr>
+
                     <div class="row" ng-hide="autocontrast">
                         <div class="col-xs-3">
                             Contrast&nbsp;-/+
@@ -187,6 +155,8 @@
                         </div>
                     </div>
 
+                    <hr>
+
                     <h4>Color filter <span ng-attr-style = "background-color:rgb({{color.red}},{{color.green}},{{color.blue}});border:1px solid #333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h4>
 
                     <div class="row">
@@ -201,6 +171,8 @@
                         </div>
                     </div>
 
+                    <hr>
+
                     <div class="row">
                         <div class="col-xs-1">
                             G
@@ -212,6 +184,8 @@
                             <input type="text" size="4" ng-model="color.green">
                         </div>
                     </div>
+
+                    <hr>
 
                     <div class="row">
                         <div class="col-xs-1">
@@ -225,6 +199,7 @@
                         </div>
                     </div>
 
+                    <hr>
 
                     <div class="row">
                         <div class="col-xs-2">
@@ -238,6 +213,8 @@
                         </div>
                     </div>
 
+                    <hr>
+
                     <div class="row">
                         <div class="col-xs-3">
                             Vignette on/off
@@ -249,7 +226,15 @@
 
                     <div class="row">
                         <div class="col-xs-12 text-center">
-                            <button href="{{ url }}" ng-click="saveImage()" download="edited">Save image</button>
+                            <form id="uploadForm">
+
+
+                                <input name="title" type="text" placeholder="Title">
+                                <input name="description" type="text" placeholder="Description">
+
+                                <button ng-click="sendImage()" download="edited">Upload</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -300,7 +285,14 @@
                 <div>
                     <button ng-click="toggleModalImageView()" type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4><b> &nbsp; &nbsp; {{title}}</b></h4>
-                    <img ng-src="{{path}}" class="img-responsive center-block img-thumbnail" alt="image">
+                    <!--img ng-src="{{path}}" class="img-responsive center-block img-thumbnail" alt="image"-->
+                    
+                    
+                    <img ng-src="{{path}}" class="img-responsive center-block img-thumbnail" alt="image"  ng-if="type === 'image'">
+                <audio audioplayer controls ng-src="{{getMediaUrl(path)}}" ng-if="type === 'audio'" >
+                </audio>
+                <video videoplayer controls ng-src="{{getMediaUrl(path)}}" ng-if="type === 'video'"width="100%" height="100%">
+                </video>
                 </div>
 
                 <!--COMMENT DIV-->
@@ -319,23 +311,30 @@
                 <!--LEAVE A COMMENT-->
                 <div class="col-md-3 col-sm-6" id="leavecomment">
                     <!--LEAVEÂ COMMENT-->
-                    <textarea class="form-control" rows="2" id="commentfield" placeholder="Write your comment here"></textarea>
-                    <button id="commentButton" type="button" class="btn btn-primary btn-sm">Comment</button>
-                    <button class="btn btn-warning" ng-click="toggleModalImageView()">Cancel</button>
+                    <form>
+                        <textarea class="form-control" rows="2" id="commentfield" placeholder="Write your comment here"></textarea>
+                        <button id="commentButton" type="button" class="btn btn-primary btn-sm">Comment</button>
+                        <button class="btn btn-warning" ng-click="toggleModalImageView()">Cancel</button>
+                    </form>
                 </div>
-
             </modal>
             <!-- IMAGE FEED -->
 
             <div ng-repeat="file in files" class="row" id="content">
                 <h4><b> &nbsp; &nbsp; {{file.title}}</b></h4>
-                <img ng-src="http://util.mw.metropolia.fi/uploads/{{ file.path }}" class="img-responsive center-block img-thumbnail" alt="image">
+                <img ng-src="http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.medium }}" class="img-responsive center-block img-thumbnail" alt="image" ng-if="file.type === 'image'">
+                <audio audioplayer controls ng-src="{{getMediaUrl(file.path)}}" ng-if="file.type === 'audio'" preload="none">
+                </audio>
+                <video videoplayer controls ng-src="{{getMediaUrl(file.path)}}" ng-if="file.type === 'video'" preload="none">
+                </video>
+                
+                
                 <p>&nbsp; &nbsp; &nbsp;{{rating}}</p>
-                <p>This is images url: http://util.mw.metropolia.fi/uploads/{{ file.path }}</p>
+                <p>This is images url: {{ file.path }}</p>
                 <p>{{file.fileId}}</p>
                 <button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></button>
                 <button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></button>
-                <button class="btn btn-primary" ng-click="toggleModalImageView(file.path,file.title)"><span class="glyphicon glyphicon-comment"></span></button>
+                <button class="btn btn-primary" ng-click="toggleModalImageView(file.path,file.title,file.type)"><span class="glyphicon glyphicon-comment"></span></button>
                 <hr>
             </div>
 
@@ -367,7 +366,9 @@
     <script src="scripts/search.js"></script>
     <script src="scripts/controllers/registerController.js"></script>
     <script src="scripts/directives/registerForm.js"></script>
-
+    <script src="scripts/controllers/loginController.js"></script>
+    <script src="scripts/directives/loginForm.js"></script>
+   
 
 </body>
 
