@@ -1,7 +1,51 @@
+@import url(http://weloveiconfonts.com/api/?family=brandico);
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+/* entypo */
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+/* brandico */
+[class*="brandico-"]:before {
+  font-family: 'brandico', sans-serif;
+}
+
+@font-face {
+font-family: 'bariol_regular_italic-webfont';
+src:url('../fonts/bariol_regular_italic-webfont.ttf') format('truetype');
+font-weight: bold;
+}
+
+@font-face {
+font-family: 'bariol_regular-webfont';
+src:url('../fonts/bariol_regular-webfont.ttf') format('truetype');
+font-weight: bold;
+}
+
+h4 {
+    font-family: 'bariol_regular-webfont';
+    font-size: 20px;
+}
+
+p {
+   font-family: 'bariol_regular_italic-webfont';
+    font-size: 15px;
+}
+
+li {
+
+   font-family: 'bariol_regular_italic-webfont';
+    font-size: 20px;
+    color:black;
+}
+
+
+
 #imageViewModal{
     position:fixed;
     z-index: +1;
-    background-color: darkgray;
+    background-color: #fafafa;
     margin-right:5%;
     padding:5%;
     

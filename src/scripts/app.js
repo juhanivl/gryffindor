@@ -135,9 +135,11 @@ myApp.controller('myCtrl', function ($scope, $http) {
         return $sce.trustAsResourceUrl(url);
     };
     
-});
+})
+   .config(function ($compileProvider) {
+        $compileProvider.aHrefSanitizationWhitelist(/ˆ\s*(https?|ftp|mailto|coui|data):/);
 
-
+    });
 
 
 angular.module('myApp')

@@ -19,7 +19,13 @@ angular.module('myApp')
             }
         });
     };
-        
+    
+    ajaxFunctions.getComments = function (args) {
+        console.log(args);
+        return $http.get('http://util.mw.metropolia.fi/ImageRekt/api/v2/comments/file/' + args);
+    };
+    
+    
     return ajaxFunctions;
     
     /*return $http.get('http://util.mw.metropolia.fi/ImageRekt/api/v2/files')

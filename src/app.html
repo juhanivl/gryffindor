@@ -10,7 +10,9 @@
     <!-- Bootstrap -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/search.css" rel="stylesheet">
+    <link href="css/social-sharing.css" rel="stylesheet">
 </head>
+
 
 <body ng-controller="myCtrl">
 
@@ -41,22 +43,22 @@
                 <div class="collapse navbar-collapse" id="myNav">
                     <ul class="nav navbar-nav">
 
-                        <li><a href="#" id="videot" data-toggle="collapse" data-target="#myNav">Images</a> </li>
+                        <li><a href="#" id="image-navbar" class="entypo-picture" data-toggle="collapse" data-target="#myNav">Images</a> </li>
 
 
-                        <li><a href="#" id="videot" data-toggle="collapse" data-target="#myNav">Videos</a> </li>
+                        <li><a href="#" id="video-navbar" class="entypo-video" data-toggle="collapse" data-target="#myNav">Videos</a> </li>
 
 
-                        <li><a href="#" id="videot" data-toggle="collapse" data-target="#myNav">Audio</a> </li>
+                        <li><a href="#" id="audio-navbar" class="entypo-note-beamed" data-toggle="collapse" data-target="#myNav">Audio</a> </li>
 
 
-                        <li><a href="#" id="videot" ng-click="toggleModalReg()" data-toggle="collapse" data-target="#myNav">Register</a> </li>
-                        <li><a href="#" id="login-navbar" ng-click="toggleModalLogin()" data-toggle="collapse" data-target="#myNav">Log in</a> </li>
-                        <li><a href="#" id="account-navbar" data-toggle="collapse" data-target="#myNav" style="display:none">My Account</a></li>
-                        <li><a href="#" id="logout-navbar" data-toggle="collapse" data-target="#myNav" style="display:none">Log out</a></li>
-                        <li><a href="#" id="videot" ng-click="toggleModalSettings()" data-toggle="collapse" data-target="#myNav">Settings</a></li>
-                        <li><a href="#" id="videot" ng-click="toggleModalEdit()" data-toggle="collapse" data-target="#myNav">Image Editor</a></li>
-                        <li><a href="#" id="videot" ng-click="toggleModalUpload()" data-toggle="collapse" data-target="#myNav">Upload</a></li>
+                        <li><a href="#" id="register-navbar" class="entypo-user-add" ng-click="toggleModalReg()" data-toggle="collapse" data-target="#myNav">Register</a> </li>
+                        <li><a href="#" id="login-navbar" class="entypo-user" ng-click="toggleModalLogin()" data-toggle="collapse" data-target="#myNav">Log in</a> </li>
+                        <li><a href="#" id="account-navbar" class="entypo-box" data-toggle="collapse" data-target="#myNav" style="display:none">My Account</a></li>
+                        <li><a href="#" id="logout-navbar" class="entypo-logout" data-toggle="collapse" data-target="#myNav" style="display:none">Log out</a></li>
+                        <li><a href="#" id="settings-navbar" class="entypo-tools" ng-click="toggleModalSettings()" data-toggle="collapse" data-target="#myNav">Settings</a></li>
+                        <li><a href="#" id="editor-navbar" class="entypo-adjust" ng-click="toggleModalEdit()" data-toggle="collapse" data-target="#myNav">Image Editor</a></li>
+                        <li><a href="#" id="upload-navbar" class="entypo-upload" ng-click="toggleModalUpload()" data-toggle="collapse" data-target="#myNav">Upload</a></li>
                     </ul>
                     </ul>
                 </div>
@@ -80,8 +82,8 @@
             <h4>Login</h4>
             <button ng-click="toggleModalLogin()" type="button" class="close" data-dismiss="modal">&times;</button>
             <div ng-controller="LoginController">
-            <login-form></login-form>
-                </div>
+                <login-form></login-form>
+            </div>
         </modal>
 
         <!--- Upload modal-->
@@ -284,28 +286,31 @@
             <modal title="Image View" id="imageViewModal" ng-show="showModalImageView" style="overflow-y: scroll; height:85%;">
                 <div>
                     <button ng-click="toggleModalImageView()" type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4><b> &nbsp; &nbsp; {{title}}</b></h4>
+                    <h4>&nbsp; &nbsp; {{title}}</h4>
                     <!--img ng-src="{{path}}" class="img-responsive center-block img-thumbnail" alt="image"-->
-                    
-                    
-                    <img ng-src="{{path}}" class="img-responsive center-block img-thumbnail" alt="image"  ng-if="type === 'image'">
-                <audio audioplayer controls ng-src="{{getMediaUrl(path)}}" ng-if="type === 'audio'" >
-                </audio>
-                <video videoplayer controls ng-src="{{getMediaUrl(path)}}" ng-if="type === 'video'"width="100%" height="100%">
-                </video>
+
+
+                    <img ng-src="{{path}}" class="img-responsive center-block img-thumbnail" alt="image" ng-if="type === 'image'">
+                    <audio audioplayer controls ng-src="{{getMediaUrl(path)}}" ng-if="type === 'audio'">
+                    </audio>
+                    <video videoplayer controls ng-src="{{getMediaUrl(path)}}" ng-if="type === 'video'" width="100%" height="100%">
+                    </video>
                 </div>
 
-                <!--COMMENT DIV-->
-                <div class="col-md-2 col-lg-2" id="commentdiv" style="overflow-y: scroll; height:300px;">
-                    <h4>Comments</h4>
-                    <div id="commentBubble" class="panel panel-default">
-                        <p id="username">USERNAME <span class="text-muted" id="timestamp">TIMESTAMP</span></p>
-                        <!--<div class="panel-body" id="commentbubble">-->
-                        <p id="comment"><i>This is a comment</i></p>
-                        <!--</div>-->
-                    </div>
+                <div class="row">
+                    <!--COMMENT DIV-->
+                    <div class="col-md-2 col-lg-2" id="commentdiv" style="overflow-y: scroll; height:300px;">
+                        <h4>Comments</h4>
+                        <div id="commentBubble" class="panel panel-default" ng-repeat="comment in comments">
 
-                    <hr>
+                            <!--<div class="panel-body" id="commentbubble">-->
+                            <p>&nbsp;<b>{{comment.username}}</b>&nbsp; &nbsp; <i>{{comment.time}}</i></p>
+                            <p>&nbsp;{{comment.comment}}</p>
+                            <!--</div>-->
+                        </div>
+
+                        <hr>
+                    </div>
                 </div>
 
                 <!--LEAVE A COMMENT-->
@@ -323,18 +328,36 @@
             <div ng-repeat="file in files" class="row" id="content">
                 <h4><b> &nbsp; &nbsp; {{file.title}}</b></h4>
                 <img ng-src="http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.medium }}" class="img-responsive center-block img-thumbnail" alt="image" ng-if="file.type === 'image'">
-                <audio audioplayer controls ng-src="{{getMediaUrl(file.path)}}" ng-if="file.type === 'audio'" preload="none">
+                <audio audioplayer controls ng-src="{{getMediaUrl(file.path)}}" ng-if="file.type === 'audio'" preload="metadata">
                 </audio>
-                <video videoplayer controls ng-src="{{getMediaUrl(file.path)}}" ng-if="file.type === 'video'" preload="none">
+                <video videoplayer controls ng-src="{{getMediaUrl(file.path)}}" ng-if="file.type === 'video'" preload="metadata" width="100%" height="100%">
                 </video>
-                
-                
+
+
                 <p>&nbsp; &nbsp; &nbsp;{{rating}}</p>
                 <p>This is images url: {{ file.path }}</p>
                 <p>{{file.fileId}}</p>
                 <button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></button>
                 <button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></button>
-                <button class="btn btn-primary" ng-click="toggleModalImageView(file.path,file.title,file.type)"><span class="glyphicon glyphicon-comment"></span></button>
+                <button class="btn btn-primary" ng-click="toggleModalImageView(file.path,file.title,file.type,file.fileId)"><span class="glyphicon glyphicon-comment"></span></button>
+
+                <div id="socialmedia" class="pull-right">
+                    <a href="http://twitter.com/home?status={{file.path}}" title="Share on Twitter" target="_blank" class="brandico-twitter-bird"><i class="fa fa-twitter"></i>Twitter</a>
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{file.path}}" title="Share on Facebook" target="_blank" class="brandico-facebook-rect"><i class="fa fa-facebook"></i> Facebook</a>
+                    <!-- Google+ -->
+                    <a href="https://plus.google.com/share?url={{file.path}}" title="Share on Google+" target="_blank" class="brandico-googleplus-rect"><i class="fa fa-google-plus"></i> Google+</a>
+                </div>
+
+
+
+
+                <!--div id="socialmedia" class="pull-right">
+                <button class="brandico-twitter-bird"></button>
+                <button class="brandico-facebook-rect"></button>
+                <button class="brandico-instagram"></buttonli>
+                <button class="brandico-googleplus-rect"></button>
+                </div-->
                 <hr>
             </div>
 
@@ -368,7 +391,8 @@
     <script src="scripts/directives/registerForm.js"></script>
     <script src="scripts/controllers/loginController.js"></script>
     <script src="scripts/directives/loginForm.js"></script>
-   
+
+
 
 </body>
 
