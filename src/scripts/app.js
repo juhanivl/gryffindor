@@ -1,145 +1,124 @@
 var myApp = angular.module('myApp', []);
+
 myApp.controller('myCtrl', function ($scope, $http) {
 
-    $scope.showModalReg = false;
-    $scope.showModalLogin = false;
-    $scope.showModalUpload = false;
-    $scope.showModalImageView = false;
-    $scope.showModalSettings = false;
-    $scope.showModalEdit = false;
+        $scope.showModalReg = false;
+        $scope.showModalLogin = false;
+        $scope.showModalUpload = false;
+        $scope.showModalImageView = false;
+        $scope.showModalSettings = false;
+        $scope.showModalEdit = false;
 
-    $scope.toggleModalReg = function () {
-        $scope.showModalReg = !$scope.showModalReg;
+        $scope.toggleModalReg = function () {
+            $scope.showModalReg = !$scope.showModalReg;
 
-    };
+        };
 
-    $scope.toggleModalLogin = function () {
-        $scope.showModalLogin = !$scope.showModalLogin;
+        $scope.toggleModalLogin = function () {
+            $scope.showModalLogin = !$scope.showModalLogin;
 
-    };
-
-
-    $scope.toggleModalUpload = function () {
-        $scope.showModalUpload = !$scope.showModalUpload;
-
-    };
-
-    $scope.toggleModalEdit = function () {
-        $scope.showModalEdit = !$scope.showModalEdit;
-    };
-
-    $scope.toggleModalSettings = function () {
-        $scope.showModalSettings = !$scope.showModalSettings;
-    };
-
-    $scope.toggleAllModals = function () {
-        if ($scope.showModalReg || $scope.showModalLogin === true || $scope.showModalUpload === true || $scope.showModalSettings === true || $scope.showModalEdit === true) {
-            $scope.showModalLogin = false;
-            $scope.showModalReg = false;
-            $scope.showModalUpload = false;
-            $scope.showModalSettings = false;
-            $scope.showModalEdit = false;
-        }
-    };
+        };
 
 
-    var active = false;
-    var active2 = false;
-    var active3 = false;
+        $scope.toggleModalUpload = function () {
+            $scope.showModalUpload = !$scope.showModalUpload;
 
-    var color = '#8FD8D8';
-    var color2 = '#FF3030';
-    var color3 = '#FFFF00';
+        };
 
+        $scope.toggleModalEdit = function () {
+            $scope.showModalEdit = !$scope.showModalEdit;
+        };
 
-    $scope.toggleColorBlue = function () {
+        $scope.toggleModalSettings = function () {
+            $scope.showModalSettings = !$scope.showModalSettings;
+        };
 
-        active = !active;
-        active2 = false;
-        active3 = false;
-    };
+        $scope.toggleModalImageView = function () {
+            $scope.showModalImageView = !$scope.showModalImageView;
+        };
 
-    $scope.toggleColorRed = function () {
-
-        active2 = !active2;
-        active = false;
-        active3 = false;
-    };
-
-    $scope.toggleColorYellow = function () {
-
-        active3 = !active3;
-        active = false;
-        active2 = false;
-    };
-
-
-    $scope.giveColor = function () {
-        if (active) {
-            return color;
-        } else if (active2) {
-            return color2;
-        } else if (active3) {
-            return color3;
-        }
-    };
-
-    $scope.giveColor2 = function () {
-        if (active) {
-            return color2;
-        }
-    };
-
-    $scope.giveColor3 = function () {
-        if (active) {
-            return color3;
-        }
-    };
-
-
-
-
-    $scope.user = {
-        username: '',
-        title: '',
-        description: '',
-        type: ''
-    };
-
-    $scope.setMediaFile = function (element) {
-        $scope.mimeType = element.files[0].type;
-        $scope.type = $scope.mimeType.substr(0, 5);
-    };
-
-    $scope.sendImage = function () {
-        var fd = new FormData(document.getElementById('fileForm'));
-        fd.append('user', 6);
-        fd.append('type', $scope.type);
-        fd.append('mime-type', $scope.mimeType);
-        var request = $http.post('http://util.mw.metropolia.fi/ImageRekt/api/v2/upload', fd, {
-            transformRequest: angular.identity,
-            headers: {
-                'Content-Type': undefined
+        $scope.toggleAllModals = function () {
+            if ($scope.showModalReg || $scope.showModalLogin === true || $scope.showModalUpload === true || $scope.showModalSettings === true || $scope.showModalEdit === true) {
+                $scope.showModalLogin = false;
+                $scope.showModalReg = false;
+                $scope.showModalUpload = false;
+                $scope.showModalSettings = false;
+                $scope.showModalEdit = false;
             }
-        });
+        };
 
-        request.then(function (response) {
-            console.log(response);
-            alert("Uploaded successfully!");
-        }, function (error) {
-            console.log(error);
-        });
-    };
-    
-    $scope.getMediaUrl = function(url){
-        return $sce.trustAsResourceUrl(url);
-    };
-    
-})
-   .config(function ($compileProvider) {
-        $compileProvider.aHrefSanitizationWhitelist(/ˆ\s*(https?|ftp|mailto|coui|data):/);
+        //if logged
+        $scope.logged = false;
+        if (localStorage.getItem('userId') === null) {
+            $scope.logged = false;
+        } else {
+            $scope.logged = true;
+        }
 
-    });
+
+        var active = false;
+        var active2 = false;
+        var active3 = false;
+
+        var color = '#8FD8D8';
+        var color2 = '#FF3030';
+        var color3 = '#FFFF00';
+
+
+        $scope.toggleColorBlue = function () {
+
+            active = !active;
+            active2 = false;
+            active3 = false;
+        };
+
+        $scope.toggleColorRed = function () {
+
+            active2 = !active2;
+            active = false;
+            active3 = false;
+        };
+
+        $scope.toggleColorYellow = function () {
+
+            active3 = !active3;
+            active = false;
+            active2 = false;
+        };
+
+
+        $scope.giveColor = function () {
+            if (active) {
+                return color;
+            } else if (active2) {
+                return color2;
+            } else if (active3) {
+                return color3;
+            }
+        };
+
+        $scope.giveColor2 = function () {
+            if (active) {
+                return color2;
+            }
+        };
+
+        $scope.giveColor3 = function () {
+            if (active) {
+                return color3;
+            }
+        };
+
+
+    })
+
+
+//    .config(function ($compileProvider) {
+//        $compileProvider.aHrefSanitizationWhitelist(/ˆ\s*(https?|ftp|mailto|coui|data):/);
+//
+//    });
+
+
 
 
 angular.module('myApp')

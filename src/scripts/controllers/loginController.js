@@ -18,21 +18,12 @@ angular.module('myApp')
                 if (response.data.status == 'login ok') {
                     //reset form
                     document.getElementById('loginForm').reset();
-                    
-                    //hide login button
-                    document.getElementById('login-navbar').style.display = 'none';
-                    console.log('login button is hide');
-                    
-                    //show log out and account button
-                    document.getElementById('account-navbar').style.display = '';
-                    document.getElementById('logout-navbar').style.display = '';
-                    console.log('show log out and account button')
-                    
+                    alert('Log in successfully')
+    
                     //save user name to localStorage        
-                    localStorage.setItem('userId', response.data.userId);                    
-                    localStorage.setItem('logged', 'true');
-                    console.log(localStorage.userId);
-                    console.log(localStorage.logged);
+                    localStorage.setItem('userId', response.data.userId);            
+                    console.log('login with userId: ' + localStorage.userId);
+                    
                     
                 } else {
                     alert('Wrong username or password');
