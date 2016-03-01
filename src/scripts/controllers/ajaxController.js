@@ -95,5 +95,29 @@ angular.module('myApp')
                 });
 
         };
+    
 
+    
+    $scope.likeFile = function (fileId) {
+        
+        
+        var userId = localStorage.getItem("userId");
+        if (userId === null) {
+                alert('Login to like');
+                
+            } else {
+        var request = ajaxService.likeFile(fileId,userId);
+            request.then(function (response) {
+                    console.log(fileId,userId);
+                    console.log(response.data);
+                document.getElementById("buttonLike").className = "btn btn-danger";
+                },
+                function (error) {
+                    console.log(error.data);
+                });
+            }
+    };
+    
+
+   
     });

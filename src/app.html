@@ -9,12 +9,12 @@
     <title>Gryffindoge</title>
     <!-- Bootstrap -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/search.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
     <link href="css/social-sharing.css" rel="stylesheet">
 </head>
 
 
-<body ng-controller="myCtrl">
+<body ng-controller="myCtrl" id="body">
 
 
     <!--NAVBAR-->
@@ -23,12 +23,23 @@
             <div class="container-fluid">
                 <div class="navbar-header">
 
+
+
                     <!-- SEARCH BUTTON --->
 
+                    <!--div ng-controller="SearchController">
+    <form role="form" id="searchForm" enctype="application/x-www-form-urlencoded">
+    <div class="form-group">
+        <label for="Search">Search</label>
+        <input type="text" class="form-control" id="search" placeholder="Search" ng-model="title" />
+    </div>
+    <button type="submit" ng-click="search()">Go</button>
 
+</form>
+</div-->
 
-                    <!-- TODO: VASEMMALLE-->
-                    <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#myNav" ng-click="toggleAllModals()">
+                    <!-- HAMBURGER MENU-->
+                    <button type="button" id = "hamburger" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#myNav" ng-click="toggleAllModals()">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -57,7 +68,7 @@
 
                         <li ng-hide="{{ logged }}"><a href="#" id="login-navbar" class="entypo-user" ng-click="toggleModalLogin()" data-toggle="collapse" data-target="#myNav">Log in</a> </li>
 
-                        <li ng-show="{{ logged }}"><a href="#" id="account-navbar" class="entypo-box" data-toggle="collapse" data-target="#myNav">My Account</a></li>
+                        <li ng-show="{{ logged }}"><a href="#" id="account-navbar" class="entypo-box" data-toggle="collapse" data-target="#myNav" ng-click="toggleModalAccount()">My Account</a></li>
 
                         <li ng-show="{{ logged }}"><a href="#" id="logout-navbar" class="entypo-logout" data-toggle="collapse" data-target="#myNav">Log out</a></li>
                     </ul>
@@ -98,10 +109,22 @@
         </modal>
 
 
+        <!-- MyAccount modal -->
+        <modal title="My Account" id="accountModal" ng-show="showModalAccount">
+            <h4>My Account</h4>
+            <button ng-click="toggleModalAccount()" type="button" class="close" data-dismiss="modal">&times;</button>
+            <form role="form">
+                <div class="form-group">
+                    <h4> This is your account page</h4>
+                </div>
+            </form>
+        </modal>
 
 
 
-        <!--IMAGE EDITOR-->
+
+
+        <!--IMAGE EDITOR-->
         <modal id="editModal" ng-show="showModalEdit">
             <h4>Image editor</h4>
             <button ng-click="toggleModalEdit()" type="button" class="close" data-dismiss="modal">&times;</button>
@@ -112,155 +135,126 @@
                 </div>
 
                 <div class="row">
-                    <canvas id="myCanvas" style="width: 50%;">
+                    <canvas id="myCanvas" style="width: 100%;">
                         <!-- Insert fallback content here -->
                     </canvas>
                 </div>
+                
+                <!--MEME TEXT-->
+                <div>
+                <h4>Memerize your picture</h4>
+                <input id="upperText" type="text" placeholder="Upper text"/>
+                <input id="lowerText" type="text" placeholder="Lower text"/>  
+                <button class="btn btn-primary btn-sm" ng-click="applyText()">Apply</button>
+                </div>
+                
+                
+                <hr>
+                <h4>Filters</h4>
+                
+                <div class="container">
+                <div class="row">
+
+                    <!--PARAMETRIT
+                        VÄRI: TULEE TINT FUNCTIOIDEN MÄÄRÄSTÄ
+                        KIRKKAUS: MIN=0 JA MAX 255
+                        KONTRASTI: MIN 0 JA MAX 10
+                        STRENGHT: MIN 0 JA MAX 100  
+                        -->
+                    <!--Filter 1-->
+                    <div class="col-xs-4">
+                        <button style="background-color:#C0C0C0"><img src="images/Tiger.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(0, 30, 2)">Tieu Ho</span></button>
+                    </div>
+                    <div class="col-xs-4">
+                        <!--FILTER 2-->
+                        <button style="background-color: #C0C0C0"><img src="images/Summer.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(1, 100, 3)">Grups</span></button>
+                    </div>
+                    <div class="col-xs-4">
+                        <!--FILTER 3-->
+                        <button style="background-color: #C0C0C0"><img src="images/Food.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(2, 30, 2)">Octave</span></button>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!--FILTER 4-->
+                    <div class="col-xs-4">
+                        <button style="background-color: #C0C0C0"><img src="images/Landscape.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(3, 47, 5)">Kenobi</span></button>
+                    </div>
+                    <!--FILTER 5-->
+                    <div class="col-xs-4">
+                        <button style="background-color: #C0C0C0"><img src="images/Dog-48.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(4, 10, 3)">Fiina&nbsp;</span></button>
+                    </div>
+                    
+                    <!--FILTER 6-->
+                    <div class="col-xs-4">
+                        <button style="background-color: #C0C0C0"><img src="images/User.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(5, 47, 3)">Permo</span></button>
+                    </div>
+                    <!--FILTER 7-->
+                </div>
+                    
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button style="background-color: #C0C0C0"><img src="images/Forest.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(6, 60, 5)">Thug&nbsp;</span></button>
+                    </div>
+                    <!--FILTER 8-->
+                    <div class="col-xs-4">
+                        <button style="background-color: #C0C0C0"><img src="images/Night.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(7, 60, 1)">Tontu</span></button>
+                    </div>
+                    <!--RESET-->
+                    <div class="col-xs-4">
+                        <button style="background-color: #C0C0C0"><img src="images/Delete.png" width="20px" height="20px">&nbsp;<span ng-click="resetImage()">Reset</span></button>
+                    </div>
+                </div>
+                </div>
+                    
                 <hr>
                 <div class="row">
-                    <h4>Brightness / Contrast</h4>
-                    <div class="row">
-                        <div class="col-xs-3">
-                            Brighness&nbsp;-/+
-                        </div>
-                        <div class="col-xs-8">
-                            <input type="range" ng-change="applyFilters()" step="1" min="-255" max="255" ng-model="brightness">
-                        </div>
-                        <div class="col-xs-1">
-                            <input type="text" size="4" ng-model="brightness" ng-change="applyFilters()">
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row" ng-hide="autocontrast">
-                        <div class="col-xs-3">
-                            Contrast&nbsp;-/+
-                        </div>
-                        <div class="col-xs-8">
-                            <input type="range" ng-change="applyFilters()" step="0.1" min="0" max="10" ng-model="contrast">
-                        </div>
-                        <div class="col-xs-1">
-                            <input type="text" size="4" ng-model="contrast" ng-change="applyFilters()">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-4">
-                            Autocontrast on/off
-                        </div>
-                        <div class="col-xs-8">
-                            <input type="checkbox" ng-model="autocontrast" ng-change="applyFilters()">
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <h4>Color filter <span ng-attr-style = "background-color:rgb({{color.red}},{{color.green}},{{color.blue}});border:1px solid #333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h4>
-
-                    <div class="row">
-                        <div class="col-xs-1">
-                            R
-                        </div>
-                        <div class="col-xs-10">
-                            <input type="range" min="0" max="255" ng-model="color.red">
-                        </div>
-                        <div class="col-xs-1">
-                            <input type="text" size="4" ng-model="color.red">
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-xs-1">
-                            G
-                        </div>
-                        <div class="col-xs-10">
-                            <input type="range" step="1" min="0" max="255" ng-model="color.green">
-                        </div>
-                        <div class="col-xs-1">
-                            <input type="text" size="4" ng-model="color.green">
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-xs-1">
-                            B
-                        </div>
-                        <div class="col-xs-10">
-                            <input type="range" step="1" min="0" max="255" ng-model="color.blue">
-                        </div>
-                        <div class="col-xs-1">
-                            <input type="text" size="4" ng-model="color.blue">
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-xs-2">
-                            Strength
-                        </div>
-                        <div class="col-xs-9">
-                            <input type="range" step="1" min="1" max="100" ng-model="strength" ng-change="applyFilters()">
-                        </div>
-                        <div class="col-xs-1">
-                            <input type="text" size="4" ng-model="strength" ng-change="applyFilters()">
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-xs-3">
-                            Vignette on/off
-                        </div>
-                        <div class="col-xs-9">
-                            <input type="checkbox" ng-model="vignette" ng-change="applyFilters()">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 text-center">
-                            <form id="uploadForm">
+                    <div class="col-xs-12 text-center">
+                        <form id="upload">
 
 
-                                <input name="title" type="text" placeholder="Title">
-                                <input name="description" type="text" placeholder="Description">
+                            <input name="title" type="text" placeholder="Title">
+                            <input name="description" type="text" placeholder="Description">
 
-                                <button ng-click="sendImage()" download="edited">Upload</button>
-                            </form>
+                            <button ng-click="sendImage()" download="edited">Upload</button>
+                        </form>
 
-                        </div>
                     </div>
                 </div>
+            </div>
 
             </div>
-            <hr>
-
-
         </modal>
 
-        <!-- Settings modal -->
+<!-- Settings modal -->
         <modal title="Settings" id="settingsModal" ng-show="showModalSettings">
+            <!--TODO: EO TOIMI<button ng-click="toggleModalSettings()" type="button" class="close">x</button>-->
             <h4>Settings</h4>
-            <button ng-click="toggleModalSettings()" type="button" class="close" data-dismiss="modal">&times;</button>
-            <form role="form">
-                <div class="form-group">
-                    <label for="color">Choose your favorite color to customize the application.</label>
-                    <button type="submit" class="btn btn-default" ng-click="toggleColorRed()">Red</button>
-                    <button type="submit" class="btn btn-default" ng-click="toggleColorBlue()">Blue</button>
-                    <button type="submit" class="btn btn-default" ng-click="toggleColorYellow()">Yellow</button>
+            <div class="row" ng-controller="settingsController">
+                <div class="col-md-6">
+                    <h4>Choose your favorite theme to customize the application.</h4>
+                    <!--GREYSCALE-->
+                    <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme('#fafafa', '#000000')" style="background-color:#fafafa;">Basic</button>
+                    <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme('#EEEEEE', '#000000')" style="background-color:#EEEEEE;">Stark</button>
+                    <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme('#BDBDBD', '#000000')" style="background-color:#BDBDBD;">Slush</button>
+                    <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme('#616161', '#fafafa')" style="background-color:#616161; color: #fafafa;">Blarp</button>
+                    <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme('#424242', '#fafafa')" style="background-color:#424242; color: #fafafa;">Night</button>
+                    <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme('#212121', '#fafafa')" style="background-color:#212121; color: #fafafa;">Sith</button>
+                    <!-- TODO: EI VÄLTTÄMÄTTÄ TARTTE
+                    <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme(5)" style="background-color:#607D8B; color: #fafafa;">Pacific</button>
+                    <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme(6)" style="background-color:#EC407A;">Lady</button>
+                    -->
                 </div>
-                <button type="submit" class="btn btn-default" ng-click="toggleModalSettings()">Done</button>
-            </form>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="toggleModalSettings()">Done</button>
+            <hr>
         </modal>
 
 
 
-        </div>
+
+    </div>
     </div>
     <!--NAVBAR-->
 
@@ -340,17 +334,20 @@
                 <p>&nbsp; &nbsp; &nbsp;{{rating}}</p>
                 <p>This is images url: {{ file.path }}</p>
                 <p>{{file.fileId}}</p>
-                <button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-                <button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+                <button class="btn btn-success" id="buttonLike" ng-click="likeFile(file.fileId)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                <!--button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></button-->
                 <button class="btn btn-primary" ng-click="showCommentView(file.path,file.title,file.type,file.fileId)"><span class="glyphicon glyphicon-comment"></span></button>
+
+
+
 
                 <div id="socialmedia" class="pull-right">
                     <!-- twitter -->
-                    <a href="{{twitterlink}}" title="Share on Twitter" target="_blank" class="brandico-twitter-bird"><i class="fa fa-twitter"></i>Twitter</a>
+                    <a ng-href="https://twitter.com/home?status={{file.path}}" title="Share on Twitter" target="_blank" class="brandico-twitter-bird"><i class="fa fa-twitter"></i>Twitter</a>
                     <!-- Facebook -->
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{file.path}}" title="Share on Facebook" target="_blank" class="brandico-facebook-rect"><i class="fa fa-facebook"></i> Facebook</a>
+                    <a ng-href="https://www.facebook.com/sharer/sharer.php?u={{file.path}}" title="Share on Facebook" target="_blank" class="brandico-facebook-rect"><i class="fa fa-facebook"></i> Facebook</a>
                     <!-- Google+ -->
-                    <a href="https://plus.google.com/share?url={{file.path}}" title="Share on Google+" target="_blank" class="brandico-googleplus-rect"><i class="fa fa-google-plus"></i> Google+</a>
+                    <a ng-href="https://plus.google.com/share?url={{file.path}}" title="Share on Google+" target="_blank" class="brandico-googleplus-rect"><i class="fa fa-google-plus"></i> Google+</a>
                 </div>
 
 
@@ -387,6 +384,7 @@
     <script src="../bower_components/angular/angular.js"></script>
     <!-- Include My App's JS file(s)-->
     <script src="scripts/app.js"></script>
+    <script src="app.config.js"></script>
 
     <!--services -->
     <script src="scripts/services/ajaxService.js"></script>
@@ -397,11 +395,15 @@
     <script src="scripts/controllers/registerController.js"></script>
     <script src="scripts/controllers/uploadController.js"></script>
     <script src="scripts/controllers/loginController.js"></script>
+    <script src="scripts/controllers/searchController.js"></script>
+    <script src="scripts/controllers/editorController.js"></script>
+    <script src="scripts/controllers/settingsController.js"></script>
 
     <!--directives -->
     <script src="scripts/directives/registerForm.js"></script>
     <script src="scripts/directives/uploadForm.js"></script>
     <script src="scripts/directives/loginForm.js"></script>
+
 
 
 
