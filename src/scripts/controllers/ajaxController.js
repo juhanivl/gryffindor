@@ -2,9 +2,10 @@ angular.module('myApp')
     .controller('AjaxCtrl', function ($scope, ajaxService2, ajaxService, $sce) {
 
         ajaxService2.success(function (data) {
-            angular.forEach(data, function (item) {
+           /* angular.forEach(data, function (item) {
                 item.path = "http://util.mw.metropolia.fi/uploads/" + item.path;
-            });
+            }); */
+            
             $scope.files = data;
         });
 
@@ -78,7 +79,7 @@ angular.module('myApp')
 
         //get trusted resources
         $scope.getMediaUrl = function (url) {
-            return $sce.trustAsResourceUrl(url);
+            return $sce.trustAsResourceUrl("http://util.mw.metropolia.fi/uploads/"+ url);
         };
 
 
@@ -97,9 +98,14 @@ angular.module('myApp')
         };
     
 
+    $scope.showLikeButton = true;
+    $scope.showDislikeButton = false;
+    
     
     $scope.likeFile = function (fileId) {
         
+        $scope.showLikeButton = !$scope.showLikeButton;
+        $scope.showDislikeButton = !$scope.showDislikeButton;
         
         var userId = localStorage.getItem("userId");
         if (userId === null) {
@@ -110,7 +116,6 @@ angular.module('myApp')
             request.then(function (response) {
                     console.log(fileId,userId);
                     console.log(response.data);
-                document.getElementById("buttonLike").className = "btn btn-danger";
                 },
                 function (error) {
                     console.log(error.data);
@@ -118,6 +123,29 @@ angular.module('myApp')
             }
     };
     
+        $scope.unlikeFile = function (fileId) {
+        
+        $scope.showDislikeButton = !$scope.showDislikeButton;
+        $scope.showLikeButton = !$scope.showLikeButton;
+        
+            
+        var userId = localStorage.getItem("userId");
+        if (userId === null) {
+                alert('Login to unlike');
+                
+            } else {
+        var request = ajaxService.unlikeFile(fileId,userId);
+            request.then(function (response) {
+                    console.log(fileId,userId);
+                    console.log(response.data);
+                },
+                function (error) {
+                    console.log(error.data);
+                });
+            }
+    };
+  
+        
 
    
     });

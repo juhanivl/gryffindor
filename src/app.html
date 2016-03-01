@@ -49,28 +49,30 @@
                 <div class="collapse navbar-collapse" id="myNav">
                     <ul class="nav navbar-nav">
 
-                        <li><a href="#" id="image-navbar" class="entypo-picture" data-toggle="collapse" data-target="#myNav">Images</a> </li>
+                        <li><a href="#/" id="image-navbar" class="entypo-home" data-toggle="collapse" data-target="#myNav">Home</a> </li>
+                        
+                        <li><a href="#images" id="image-navbar" class="entypo-picture" data-toggle="collapse" data-target="#myNav">Images</a> </li>
 
 
-                        <li><a href="#" id="video-navbar" class="entypo-video" data-toggle="collapse" data-target="#myNav">Videos</a> </li>
+                        <li><a href="#videos" id="video-navbar" class="entypo-video" data-toggle="collapse" data-target="#myNav">Videos</a> </li>
 
 
-                        <li><a href="#" id="audio-navbar" class="entypo-note-beamed" data-toggle="collapse" data-target="#myNav">Audio</a> </li>
+                        <li><a href="#audios" id="audio-navbar" class="entypo-note-beamed" data-toggle="collapse" data-target="#myNav">Audio</a> </li>
 
 
-                        <li><a href="#" id="register-navbar" class="entypo-user-add" ng-click="toggleModalReg()" data-toggle="collapse" data-target="#myNav">Register</a> </li>
+                        <li><a href="" id="register-navbar" class="entypo-user-add" ng-click="toggleModalReg()" data-toggle="collapse" data-target="#myNav">Register</a> </li>
 
-                        <li><a href="#" id="settings-navbar" class="entypo-tools" ng-click="toggleModalSettings()" data-toggle="collapse" data-target="#myNav">Settings</a></li>
+                        <li><a href="" id="settings-navbar" class="entypo-tools" ng-click="toggleModalSettings()" data-toggle="collapse" data-target="#myNav">Settings</a></li>
 
-                        <li><a href="#" id="editor-navbar" class="entypo-adjust" ng-click="toggleModalEdit()" data-toggle="collapse" data-target="#myNav">Image Editor</a></li>
+                        <li><a href="" id="editor-navbar" class="entypo-adjust" ng-click="toggleModalEdit()" data-toggle="collapse" data-target="#myNav">Image Editor</a></li>
 
-                        <li><a href="#" id="upload-navbar" class="entypo-upload" ng-click="toggleModalUpload()" data-toggle="collapse" data-target="#myNav">Upload</a></li>
+                        <li><a href="" id="upload-navbar" class="entypo-upload" ng-click="toggleModalUpload()" data-toggle="collapse" data-target="#myNav">Upload</a></li>
 
                         <li ng-hide="{{ logged }}"><a href="#" id="login-navbar" class="entypo-user" ng-click="toggleModalLogin()" data-toggle="collapse" data-target="#myNav">Log in</a> </li>
 
                         <li ng-show="{{ logged }}"><a href="#" id="account-navbar" class="entypo-box" data-toggle="collapse" data-target="#myNav" ng-click="toggleModalAccount()">My Account</a></li>
 
-                        <li ng-show="{{ logged }}"><a href="#" id="logout-navbar" class="entypo-logout" data-toggle="collapse" data-target="#myNav">Log out</a></li>
+                        <li ng-show="{{ logged }}"><a href="#" id="logout-navbar" class="entypo-logout" data-toggle="collapse" data-target="#myNav" ng-click="toggleModalLogout()">Log out</a></li>
                     </ul>
 
                 </div>
@@ -116,6 +118,7 @@
             <form role="form">
                 <div class="form-group">
                     <h4> This is your account page</h4>
+                    <p>{{testi}}</p>
                 </div>
             </form>
         </modal>
@@ -163,15 +166,15 @@
                         -->
                     <!--Filter 1-->
                     <div class="col-xs-4">
-                        <button style="background-color:#C0C0C0"><img src="images/Tiger.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(0, 30, 2)">Tieu Ho</span></button>
+                        <button style="background-color:#C0C0C0" class="btn btn-default btn-xs"><img src="images/Tiger.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(0, 30, 2)">Tieu Ho</span></button>
                     </div>
                     <div class="col-xs-4">
                         <!--FILTER 2-->
-                        <button style="background-color: #C0C0C0"><img src="images/Summer.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(1, 100, 3)">Grups</span></button>
+                        <button style="background-color: #C0C0C0" class="btn btn-default btn-xs"><img src="images/Summer.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(1, 100, 3)">Grups</span></button>
                     </div>
                     <div class="col-xs-4">
                         <!--FILTER 3-->
-                        <button style="background-color: #C0C0C0"><img src="images/Food.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(2, 30, 2)">Octave</span></button>
+                        <button style="background-color: #C0C0C0" class="btn btn-default btn-xs"><img src="images/Food.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(2, 30, 2)">Octave</span></button>
 
                     </div>
                 </div>
@@ -179,31 +182,31 @@
                 <div class="row">
                     <!--FILTER 4-->
                     <div class="col-xs-4">
-                        <button style="background-color: #C0C0C0"><img src="images/Landscape.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(3, 47, 5)">Kenobi</span></button>
+                        <button style="background-color: #C0C0C0" class="btn btn-default btn-xs"><img src="images/Landscape.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(3, 47, 5)">Kenobi</span></button>
                     </div>
                     <!--FILTER 5-->
                     <div class="col-xs-4">
-                        <button style="background-color: #C0C0C0"><img src="images/Dog-48.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(4, 10, 3)">Fiina&nbsp;</span></button>
+                        <button style="background-color: #C0C0C0" class="btn btn-default btn-xs"><img src="images/Dog-48.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(4, 10, 3)">Fiina&nbsp;&nbsp;</span></button>
                     </div>
                     
                     <!--FILTER 6-->
                     <div class="col-xs-4">
-                        <button style="background-color: #C0C0C0"><img src="images/User.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(5, 47, 3)">Permo</span></button>
+                        <button style="background-color: #C0C0C0" class="btn btn-default btn-xs"><img src="images/User.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(5, 47, 3)">Permo</span></button>
                     </div>
                     <!--FILTER 7-->
                 </div>
                     
                 <div class="row">
                     <div class="col-xs-4">
-                        <button style="background-color: #C0C0C0"><img src="images/Forest.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(6, 60, 5)">Thug&nbsp;</span></button>
+                        <button style="background-color: #C0C0C0" class="btn btn-default btn-xs"><img src="images/Forest.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(6, 60, 5)">Thug&nbsp;&nbsp;&nbsp;</span></button>
                     </div>
                     <!--FILTER 8-->
                     <div class="col-xs-4">
-                        <button style="background-color: #C0C0C0"><img src="images/Night.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(7, 60, 1)">Tontu</span></button>
+                        <button style="background-color: #C0C0C0" class="btn btn-default btn-xs"><img src="images/Night.png" width="20px" height="20px">&nbsp;<span ng-click="applyFilters(7, 60, 1)">Tontu&nbsp;</span></button>
                     </div>
                     <!--RESET-->
                     <div class="col-xs-4">
-                        <button style="background-color: #C0C0C0"><img src="images/Delete.png" width="20px" height="20px">&nbsp;<span ng-click="resetImage()">Reset</span></button>
+                        <button style="background-color: #C0C0C0" class="btn btn-default btn-xs"><img src="images/Delete.png" width="20px" height="20px">&nbsp;<span ng-click="resetImage()">Reset&nbsp;</span></button>
                     </div>
                 </div>
                 </div>
@@ -213,10 +216,11 @@
                     <div class="col-xs-12 text-center">
                         <form id="upload">
 
-
+                            <div class="pull-left">
                             <input name="title" type="text" placeholder="Title">
+                            
                             <input name="description" type="text" placeholder="Description">
-
+                            </div>
                             <button ng-click="sendImage()" download="edited">Upload</button>
                         </form>
 
@@ -241,10 +245,7 @@
                     <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme('#616161', '#fafafa')" style="background-color:#616161; color: #fafafa;">Blarp</button>
                     <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme('#424242', '#fafafa')" style="background-color:#424242; color: #fafafa;">Night</button>
                     <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme('#212121', '#fafafa')" style="background-color:#212121; color: #fafafa;">Sith</button>
-                    <!-- TODO: EI VÄLTTÄMÄTTÄ TARTTE
-                    <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme(5)" style="background-color:#607D8B; color: #fafafa;">Pacific</button>
-                    <button type="submit" class="btn btn-default btn-sm" ng-click="toggleTheme(6)" style="background-color:#EC407A;">Lady</button>
-                    -->
+       
                 </div>
             </div>
             <button type="submit" class="btn btn-primary" ng-click="toggleModalSettings()">Done</button>
@@ -265,107 +266,9 @@
 
     <!---CONTENT-->
 
-    <hr>
-    <br>
-
-
-    <div class="col-md-1" ng-controller="AjaxCtrl">
-        <div class="row" id="content">
-
-            <!--IMAGEVIEW-->
-            <modal title="Image View" id="imageViewModal" ng-show="showModalImageView" style="overflow-y: scroll; height:85%;">
-
-                <div>
-                    <button ng-click="toggleModalImageView()" type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4>&nbsp; &nbsp; {{title}}</h4>
-                    <!--img ng-src="{{path}}" class="img-responsive center-block img-thumbnail" alt="image"-->
-
-                    <img ng-src="{{getMediaUrl(path)}}" class="img-responsive center-block img-thumbnail" alt="image" ng-if="type === 'image'">
-
-                    <audio audioplayer controls ng-src="{{getMediaUrl(path)}}" ng-if="type === 'audio'">
-                    </audio>
-
-                    <video videoplayer controls ng-src="{{getMediaUrl(path)}}" ng-if="type === 'video'" width="100%" height="100%">
-                    </video>
-                </div>
-
-                <div class="row">
-                    <!--COMMENT DIV-->
-                    <div class="col-md-2 col-lg-2" id="commentdiv" style="overflow-y: scroll; height:300px;">
-                        <h4>Comments</h4>
-
-                        <div id="commentBubble" class="panel panel-default" ng-repeat="comment in comments">
-
-                            <!--<div class="panel-body" id="commentbubble">-->
-                            <p>&nbsp;<b>{{comment.username}}</b>&nbsp; &nbsp; <i>{{comment.time}}</i></p>
-                            <p>&nbsp;{{comment.comment}}</p>
-                            <!--</div>-->
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-
-                <!--LEAVE A COMMENT-->
-                <div class="col-md-3 col-sm-6" id="leavecomment">
-                    <!--LEAVEÂ COMMENT-->
-                    <form role="form" id="commentForm" enctype="application/x-www-form-urlencoded">
-                        <textarea class="form-control" rows="2" id="commentField" placeholder="Write your comment here" ng-model="cmt"></textarea>
-                        <button id="commentButton" type="button" class="btn btn-primary btn-sm" ng-click="addComment()">Comment</button>
-                        <button class="btn btn-warning" ng-click="toggleModalImageView()">Cancel</button>
-                    </form>
-                </div>
-            </modal>
-
-
-
-            <!-- IMAGE FEED -->
-
-            <div ng-repeat="file in files" class="row" id="content">
-                <h4><b> &nbsp; &nbsp; {{file.title}}</b></h4>
-
-                <img ng-src="http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.medium }}" class="img-responsive center-block img-thumbnail" alt="image" ng-if="file.type === 'image'">
-
-                <audio audioplayer controls ng-src="{{getMediaUrl(file.path)}}" ng-if="file.type === 'audio'" preload="metadata">
-                </audio>
-
-                <video videoplayer controls ng-src="{{getMediaUrl(file.path)}}" ng-if="file.type === 'video'" preload="metadata" width="100%" height="100%">
-                </video>
-
-                <p>&nbsp; &nbsp; &nbsp;{{rating}}</p>
-                <p>This is images url: {{ file.path }}</p>
-                <p>{{file.fileId}}</p>
-                <button class="btn btn-success" id="buttonLike" ng-click="likeFile(file.fileId)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-                <!--button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></button-->
-                <button class="btn btn-primary" ng-click="showCommentView(file.path,file.title,file.type,file.fileId)"><span class="glyphicon glyphicon-comment"></span></button>
-
-
-
-
-                <div id="socialmedia" class="pull-right">
-                    <!-- twitter -->
-                    <a ng-href="https://twitter.com/home?status={{file.path}}" title="Share on Twitter" target="_blank" class="brandico-twitter-bird"><i class="fa fa-twitter"></i>Twitter</a>
-                    <!-- Facebook -->
-                    <a ng-href="https://www.facebook.com/sharer/sharer.php?u={{file.path}}" title="Share on Facebook" target="_blank" class="brandico-facebook-rect"><i class="fa fa-facebook"></i> Facebook</a>
-                    <!-- Google+ -->
-                    <a ng-href="https://plus.google.com/share?url={{file.path}}" title="Share on Google+" target="_blank" class="brandico-googleplus-rect"><i class="fa fa-google-plus"></i> Google+</a>
-                </div>
-
-
-
-
-                <!--div id="socialmedia" class="pull-right">
-                <button class="brandico-twitter-bird"></button>
-                <button class="brandico-facebook-rect"></button>
-                <button class="brandico-instagram"></buttonli>
-                <button class="brandico-googleplus-rect"></button>
-                </div-->
-                <hr>
-            </div>
-
-        </div>
-    </div>
-
-
+<div class="container-fluid">
+    <div ng-view=""></div>
+</div>
 
 
 
@@ -382,9 +285,11 @@
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Include angular files & plugins -->
     <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
     <!-- Include My App's JS file(s)-->
     <script src="scripts/app.js"></script>
     <script src="app.config.js"></script>
+    <script src="scripts/configs/config.js"></script>
 
     <!--services -->
     <script src="scripts/services/ajaxService.js"></script>

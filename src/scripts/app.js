@@ -1,5 +1,7 @@
-var myApp = angular.module('myApp', []);
-    myApp.controller('myCtrl', function ($scope, $http) {
+var myApp = angular.module('myApp',['ngRoute']);
+
+
+    myApp.controller('myCtrl', function ($scope, $http, ajaxService) {
 
         $scope.showModalReg = false;
         $scope.showModalLogin = false;
@@ -61,6 +63,28 @@ var myApp = angular.module('myApp', []);
             $scope.logged = true;
         }
 
+        $scope.toggleModalLogout = function () {
+            
+            localStorage.removeItem('userId');
+            $scope.logged = false;
+            
+        };
+        
+    
+          $scope.testi = function () {
+          
+          var userId = localStorage.getItem('userId');
+            console.log(userId);
+        
+          var request = ajaxService.getUserById(userId);
+              request.then(function (response) {
+                    console.log(fileId,userId);
+                    console.log(response.data);
+                },
+                function (error) {
+                    console.log(error.data);
+                });
+            };
 
     });
 

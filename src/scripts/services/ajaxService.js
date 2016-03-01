@@ -48,16 +48,20 @@ angular.module('myApp')
         };
 
         ajaxFunctions.search = function (args) {
-        console.log(args);
-        return $http.post(urlBase + 'files/search/', $httpParamSerializer(args), {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        });
-    };
-    
-    ajaxFunctions.likeFile = function (fileId,userId) {
-            return $http.get('http://util.mw.metropolia.fi/ImageRekt/api/v2/like/'+ fileId + "/" + userId);
+            console.log(args);
+            return $http.post(urlBase + 'files/search/', $httpParamSerializer(args), {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+        };
+
+        ajaxFunctions.likeFile = function (fileId, userId) {
+            return $http.get('http://util.mw.metropolia.fi/ImageRekt/api/v2/like/' + fileId + "/" + userId);
+        };
+
+        ajaxFunctions.unlikeFile = function (fileId, userId) {
+            return $http.get('http://util.mw.metropolia.fi/ImageRekt/api/v2/unlike/' + fileId + "/" + userId);
         };
 
         return ajaxFunctions;

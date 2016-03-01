@@ -108,6 +108,8 @@ angular.module('myApp')
 
             $scope.ctx.clearRect(0, 0, $scope.canvas.width, $scope.canvas.height);
             $scope.ctx.putImageData($scope.imageData, 0, 0);
+
+            $scope.applyText();
         };
 
         //BIRGHTNESS
@@ -179,9 +181,18 @@ angular.module('myApp')
             console.log("upper text: " + upperText);
             console.log("lower text: " + lowerText);
 
+            // CHECK IF THE IMAGE IS LANDSCAPE OR PORTRAIT
+
+            if ($scope.canvas.width >= $scope.canvas.height) {
+                var size = ($scope.canvas.width / $scope.canvas.height) * 100;
+            } else {
+                var size = ($scope.canvas.height / $scope.canvas.width) * 100;
+            }
+
+
             //MAKE TEXT MEME STYLISH LIKE
             $scope.ctx.lineWidth = 5;
-            $scope.ctx.font = '100% sans-serif';
+            $scope.ctx.font = size + 'pt ' + 'sans-serif';
             $scope.ctx.strokeStyle = 'black';
             $scope.ctx.fillStyle = 'white';
             $scope.ctx.textAlign = 'center';
@@ -190,7 +201,7 @@ angular.module('myApp')
 
             //UPPER TEXT
             x1 = $scope.canvas.width / 2;
-            y1 = $scope.canvas.height * 0.1;
+            y1 = $scope.canvas.height * 0.15;
             console.log("y1: " + y1);
             $scope.ctx.strokeText(upperText, x1, y1);
             $scope.ctx.fillText(upperText, x1, y1);
@@ -207,22 +218,29 @@ angular.module('myApp')
         $scope.sendImage = function () {
             var fd = new FormData(document.getElementById('upload'));
             var userId = localStorage.getItem('userId');
-            fd.append('user', userId);
-            fd.append('type', "image");
-            fd.append("file", dataURItoBlob($scope.canvas.toDataURL()));
-            var request = $http.post('http://util.mw.metropolia.fi/ImageRekt/api/v2/upload', fd, {
-                transformRequest: angular.identity,
-                headers: {
-                    'Content-Type': undefined
-                }
-            });
 
-            request.then(function (response) {
-                console.log(response);
-                alert("File uploaded successfully!");
-            }, function (error) {
-                console.log(error);
-            });
+            if (userId === null) {
+                alert('Login to upload');
+
+            } else {
+
+                fd.append('user', userId);
+                fd.append('type', "image");
+                fd.append("file", dataURItoBlob($scope.canvas.toDataURL()));
+                var request = $http.post('http://util.mw.metropolia.fi/ImageRekt/api/v2/upload', fd, {
+                    transformRequest: angular.identity,
+                    headers: {
+                        'Content-Type': undefined
+                    }
+                });
+
+                request.then(function (response) {
+                    console.log(response);
+                    alert("File uploaded successfully!");
+                }, function (error) {
+                    console.log(error);
+                });
+            };
         };
 
     })
