@@ -8,4 +8,18 @@
         <input type="password" class="form-control" id="password" placeholder="Password" ng-model="pwd" />
     </div>
     <button type="submit" class="btn btn-default" ng-click="login()">Login</button>
+    
+    </div>
+    <button type="submit" class="btn btn-default" ng-click="register()">Submit</button>
+    
+     <div class="alert alert-success fade in" ng-show="showSuccess">
+        <strong>Login was successful</strong>
+    </div>
+
+    <div class="alert alert-danger fade in" ng-show="showFail">
+        <strong>Login failed</strong>
+        <p>Pro tip: Check that username and password are correct.</p>
+    </div>
+    
+    
 </form>

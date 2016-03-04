@@ -1,4 +1,7 @@
 <form role="form" id="uploadForm" enctype="multipart/form-data">
+    
+    
+     
    
    <input type="file" name="file" onchange="angular.element(this).scope().setMediaFile(this)">
    
@@ -13,4 +16,15 @@
     </div>
     
     <button type="submit" class="btn btn-default" ng-click="uploadMediaFile()">Upload</button>
+    
+    <div class="alert alert-success fade in" ng-show="showSuccess">
+        <strong>Upload was successful</strong>
+    </div>
+
+    <div class="alert alert-danger fade in" ng-show="showFail">
+        <strong>Upload failed</strong>
+        <p>Pro tip: Try logging in before uploading.</p>
+    </div>
+
+    
 </form>

@@ -1,7 +1,11 @@
 angular.module('myApp')
     .controller('UploadController', function ($scope, ajaxService) {
 
+    $scope.showSuccess= false;
+    $scope.showFail = false;
 
+    
+    
         $scope.setMediaFile = function (element) {
             console.log(element);
             $scope.mimeType = element.files[0].type;
@@ -10,10 +14,11 @@ angular.module('myApp')
 
         $scope.uploadMediaFile = function () {
             var userId = localStorage.getItem('userId');
-
             //check if user is logged in
             if (userId === null) {
-                alert('Login to upload awsome files');
+                 //FAIL
+                 $scope.showFail = !$scope.showFail;
+                //alert('Login to upload awsome files');
 
             } else {
                 var fd = new FormData(document.getElementById('uploadForm'));
@@ -25,12 +30,19 @@ angular.module('myApp')
 
                 request.then(function (response) {
                     console.log(response.data);
-                    $scope.toggleModalUpload();
+                    //to close modal
+                    //$scope.toggleModalUpload();
                     document.getElementById('uploadForm').reset();
-                    alert('Successfully!!!');
+                    
+                    //SUCCESS
+                     $scope.showSuccess = !$scope.showSuccess;
+                    //alert('Successfully!!!');
+                    
+                    
+                    
                 }, function (error) {
                     console.log(error.data);
-                    alert(error.data);
+                    //alert(error.data);
                 });
             };
 

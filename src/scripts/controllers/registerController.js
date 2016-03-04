@@ -1,5 +1,9 @@
 angular.module('myApp')
     .controller('RegisterController', function ($scope, ajaxService) {
+    
+    
+    $scope.showSuccess= false;
+    $scope.showFail = false;
 
         $scope.register = function () {
             
@@ -16,11 +20,16 @@ angular.module('myApp')
                 
                 if (response.data.status == 'ok') {
                     document.getElementById('registerForm').reset();
-                    alert('Register successfully!!!');
+                    //SUCCESS
+                    $scope.showSuccess= !$scope.showSuccess;
+                    
                 } else {
-                    alert('Username already exists');
+                    //FAIL
+                    $scope.showFail = !$scope.showFail;
                 }
             }, function (error) {
+                //FAIL
+                $scope.showFail = !$scope.showFail;
                 console.log(error.data);
             });
         };

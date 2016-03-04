@@ -1,5 +1,9 @@
 angular.module('myApp')
     .controller('LoginController', function ($scope, ajaxService) {
+    
+    
+    $scope.showSuccess= false;
+    $scope.showFail = false;
 
         $scope.login = function () {
 
@@ -18,7 +22,8 @@ angular.module('myApp')
                 if (response.data.status == 'login ok') {
                     //reset form
                     document.getElementById('loginForm').reset();
-                    alert('Log in successfully')
+                    //SUCCESS
+                    $scope.showSuccess= !$scope.showSuccess;
     
                     //save user name to localStorage        
                     localStorage.setItem('userId', response.data.userId);            
@@ -26,10 +31,14 @@ angular.module('myApp')
                     
                     
                 } else {
-                    alert('Wrong username or password');
+                    //FAIL
+                    $scope.showFail = !$scope.showFail;
+
                 }
 
             }, function (error) {
+                //FAIL
+                    $scope.showFail = !$scope.showFail;
                 console.log(error);
             });
         };

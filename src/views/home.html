@@ -21,9 +21,9 @@
     
 
         <div class="row">
+            <h4>Comments</h4>
             <!--COMMENT DIV-->
             <div class="col-md-2 col-lg-2" id="commentdiv" style="overflow-y: scroll; height:300px;">
-                <h4>Comments</h4>
 
                 <div id="commentBubble" class="panel panel-default" ng-repeat="comment in comments">
 
@@ -75,7 +75,7 @@
                     <p>{{file.fileId}}</p>
                     
                     
-                    <button class="btn btn-success" id={{file.fileId}} ng-click="toggleLike(file.fileId)" ng-show="showLikeButton"><span class="fontawesome fontawesome-thumbs-up"></span></button>
+                    <button class="btn btn-default" id={{file.fileId}} ng-click="toggleLike(file.fileId)" ng-show="showLikeButton"><span class="fontawesome fontawesome-thumbs-up"></span></button>
 
 <button class="btn btn-primary" ng-click="showCommentView(file.path,file.title,file.type,file.fileId)"><span class="fontawesome fontawesome-comment"></span>
 </button>

@@ -16,5 +16,16 @@
         <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="email" />
     </div>
     <button type="submit" class="btn btn-default" ng-click="register()">Submit</button>
+    
+     <div class="alert alert-success fade in" ng-show="showSuccess">
+        <strong>Registration was successful</strong>
+    </div>
+
+    <div class="alert alert-danger fade in" ng-show="showFail">
+        <strong>Registration failed</strong>
+        <p>Pro tip: Please fill the forms correctly.</p>
+    </div>
+
+    
 
 </form>
