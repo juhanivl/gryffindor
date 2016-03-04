@@ -14,7 +14,7 @@ angular.module('myApp')
                 console.log(response.data);
                 
                 if (response.data.status == 'ok') {
-                    document.getElementById('search').reset();
+                    document.getElementById('searchForm').reset();
                 } 
             }, function (error) {
                 console.log(error.data);

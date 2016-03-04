@@ -23,6 +23,13 @@ src:url('../fonts/bariol_regular-webfont.ttf') format('truetype');
 font-weight: bold;
 }
 
+@font-face {
+font-family: 'lakesight';
+src:url('../fonts/lakesight.ttf') format('truetype');
+font-weight: bold;
+}
+
+
 h4 {
     font-family: 'bariol_regular-webfont';
     font-size: 20px;
@@ -40,7 +47,11 @@ li {
     color:black;
 }
 
-
+#logo {
+    
+    font-family: 'lakesight';
+    font-size: 30px;
+}
 
 #imageViewModal{
     position:fixed;

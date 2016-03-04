@@ -10,6 +10,7 @@ var myApp = angular.module('myApp',['ngRoute']);
         $scope.showModalSettings = false;
         $scope.showModalEdit = false;
         $scope.showModalAccount = false;
+        $scope.showModalSearch = false;
 
         $scope.toggleModalReg = function () {
             $scope.showModalReg = !$scope.showModalReg;
@@ -43,15 +44,21 @@ var myApp = angular.module('myApp',['ngRoute']);
         $scope.toggleModalImageView = function () {
             $scope.showModalImageView = !$scope.showModalImageView;
         };
+        
+         $scope.toggleModalSearch = function () {
+            $scope.showModalSearch = !$scope.showModalSearch;
+        };
+
 
         $scope.toggleAllModals = function () {
-            if ($scope.showModalReg || $scope.showModalLogin === true || $scope.showModalUpload === true || $scope.showModalSettings === true || $scope.showModalEdit === true || $scope.showModalAccount === true) {
+            if ($scope.showModalReg || $scope.showModalLogin === true || $scope.showModalUpload === true || $scope.showModalSettings === true || $scope.showModalEdit === true || $scope.showModalAccount === true || $scope.showModalSearch === true) {
                 $scope.showModalLogin = false;
                 $scope.showModalReg = false;
                 $scope.showModalUpload = false;
                 $scope.showModalSettings = false;
                 $scope.showModalEdit = false;
                 $scope.showModalAccount = false;
+                $scope.showModalSearch = false;
             }
         };
 
