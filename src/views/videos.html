@@ -56,7 +56,7 @@
                     <h4><b> &nbsp; &nbsp; {{file.title}}</b></h4>
 
 
-                    <video videoplayer controls ng-src="{{getMediaUrl(file.path)}}" ng-if="file.type === 'video'" preload="metadata" width="100%" height="100%">
+                    <video videoplayer controls ng-src="{{getMediaUrl(file.path)}}" ng-if="file.type === 'video'" preload="metadata" width="100%" height="100%" ng-click="showCommentView(file.path,file.title,file.type,file.fileId)">
                     </video>
 
 
@@ -65,11 +65,10 @@
                     <p>{{file.fileId}}</p>
                     
                     
-                    <button class="btn btn-success" id={{file.fileId}} ng-click="likeFile(file.fileId)" ng-show="showLikeButton"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                    <button class="btn btn-success" id={{file.fileId}} ng-click="toggleLike(file.fileId)" ng-show="showLikeButton"><span class="fontawesome fontawesome-thumbs-up"></span></button>
 
-<button class="btn btn-danger" id={{file.fileId}} ng-click="unlikeFile(file.fileId)" ng-show="showDislikeButton"><span class="glyphicon glyphicon-thumbs-down"></span></button>
 
-<button class="btn btn-primary" ng-click="showCommentView(file.path,file.title,file.type,file.fileId)"><span class="glyphicon glyphicon-comment"></span>
+<button class="btn btn-primary" ng-click="showCommentView(file.path,file.title,file.type,file.fileId)"><span class="fontawesome fontawesome-comment"></span>
 </button>
                     
 

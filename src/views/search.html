@@ -15,10 +15,7 @@
 
             <video videoplayer controls ng-src="{{getMediaUrl(path)}}" ng-if="type === 'video'" width="100%" height="100%">
             </video>
-        
-      <p>{{description}}</p>
         </div>
-    
 
         <div class="row">
             <!--COMMENT DIV-->
@@ -53,21 +50,15 @@
     <div class="container-fluid">
         <div ng-repeat="file in files" id="content">
 
-            <div class="row">
+            <div class="row" ng-if="file.type === 'image' ">
                 <div class="col-xs-12 col-md-6">
 
                     <h4><b> &nbsp; &nbsp; {{file.title}}</b></h4>
 
-                    <img ng-src="{{getMediaUrl(file.path)}}" class="img-responsive center-block img-thumbnail" alt="image" ng-if="file.type === 'image'" ng-srcset="http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.small }} 180w, 
+                    <img ng-src="{{getMediaUrl(file.path)}}" class="img-responsive center-block img-thumbnail" alt="image" ng-if="file.title === '{{search}}'" ng-srcset="http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.small }} 180w, 
 					http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.medium }} 320w,
-					http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.large }} 640w"
-                         ng-click="showCommentView(file.path,file.title,file.type,file.fileId)">
+					http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.large }} 640w">
 
-                    <audio audioplayer controls ng-src="{{getMediaUrl(file.path)}}" ng-if="file.type === 'audio'" preload="metadata" ng-click="showCommentView(file.path,file.title,file.type,file.fileId)">
-                    </audio>
-
-                    <video videoplayer controls ng-src="{{getMediaUrl(file.path)}}" ng-if="file.type === 'video'" preload="metadata" width="100%" height="100%" ng-click="showCommentView(file.path,file.title,file.type,file.fileId)">
-                    </video>
 
 
                     <!--                        <p>&nbsp; &nbsp; &nbsp;{{rating}}</p>-->
@@ -75,7 +66,9 @@
                     <p>{{file.fileId}}</p>
                     
                     
-                    <button class="btn btn-success" id={{file.fileId}} ng-click="toggleLike(file.fileId)" ng-show="showLikeButton"><span class="fontawesome fontawesome-thumbs-up"></span></button>
+                    <button class="btn btn-success" id={{file.fileId}} ng-click="likeFile(file.fileId)" ng-show="showLikeButton"><span class="fontawesome fontawesome-thumbs-up"></span></button>
+
+<button class="btn btn-danger" id={{file.fileId}} ng-click="unlikeFile(file.fileId)" ng-show="showDislikeButton"><span class="fontawesome fontawesome-thumbs-down"></span></button>
 
 <button class="btn btn-primary" ng-click="showCommentView(file.path,file.title,file.type,file.fileId)"><span class="fontawesome fontawesome-comment"></span>
 </button>

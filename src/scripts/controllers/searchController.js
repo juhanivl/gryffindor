@@ -7,16 +7,15 @@ angular.module('myApp')
                 title: $scope.title
             };
 
+            console.log(data);
             var request = ajaxService.search(data);
 
             request.then(function (response) {
                 console.log(response.data);
                 
                 if (response.data.status == 'ok') {
-                    document.getElementById('searchForm').reset();
-                } else {
-                    alert('Title not found');
-                }
+                    document.getElementById('search').reset();
+                } 
             }, function (error) {
                 console.log(error.data);
             });

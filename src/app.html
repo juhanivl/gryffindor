@@ -16,6 +16,8 @@
 
 <body ng-controller="myCtrl" id="body">
 
+    
+
 
     <!--NAVBAR-->
     <div>
@@ -23,56 +25,58 @@
             <div class="container-fluid">
                 <div class="navbar-header">
 
-
-
-                    <!-- SEARCH BUTTON --->
-
-                    <!--div ng-controller="SearchController">
+                    
+                    <div ng-controller="SearchController" class="pull-right">
     <form role="form" id="searchForm" enctype="application/x-www-form-urlencoded">
-    <div class="form-group">
-        <label for="Search">Search</label>
-        <input type="text" class="form-control" id="search" placeholder="Search" ng-model="title" />
-    </div>
-    <button type="submit" ng-click="search()">Go</button>
+        <div class="form-group">
+            <input type="text" class="form-control" id="search" placeholder="Search" style="width: 150px" ng-model="title" />
+        </div>
+        <button type="submit" ng-click="search()" ><a href="#search">Go</a></button>
 
-</form>
-</div-->
+    </form>
+</div>
+                    
+<!-- HAMBURGER MENU-->
+<button type="button" id="hamburger" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#myNav" ng-click="toggleAllModals()">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+</button>
+</div>
 
-                    <!-- HAMBURGER MENU-->
-                    <button type="button" id = "hamburger" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#myNav" ng-click="toggleAllModals()">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
+
+<!-- SEARCH BUTTON --->
+
+
+
 
                 <div class="collapse navbar-collapse" id="myNav">
                     <ul class="nav navbar-nav">
 
-                        <li><a href="#/" id="image-navbar" class="entypo-home" data-toggle="collapse" data-target="#myNav">Home</a> </li>
+                        <li><a href="#/" id="home-navbar" class="fontawesome fontawesome-home" data-toggle="collapse" data-target="#myNav">Home</a> </li>
                         
-                        <li><a href="#images" id="image-navbar" class="entypo-picture" data-toggle="collapse" data-target="#myNav">Images</a> </li>
+                        <li><a href="#images" id="image-navbar" class="fontawesome fontawesome-picture" data-toggle="collapse" data-target="#myNav">Images</a> </li>
 
 
-                        <li><a href="#videos" id="video-navbar" class="entypo-video" data-toggle="collapse" data-target="#myNav">Videos</a> </li>
+                        <li><a href="#videos" id="video-navbar" class="fontawesome fontawesome-facetime-video" data-toggle="collapse" data-target="#myNav">Videos</a> </li>
 
 
-                        <li><a href="#audios" id="audio-navbar" class="entypo-note-beamed" data-toggle="collapse" data-target="#myNav">Audio</a> </li>
+                        <li><a href="#audios" id="audio-navbar" class="fontawesome fontawesome-music" data-toggle="collapse" data-target="#myNav">Audio</a> </li>
 
 
-                        <li><a href="" id="register-navbar" class="entypo-user-add" ng-click="toggleModalReg()" data-toggle="collapse" data-target="#myNav">Register</a> </li>
+                        <li><a href="" id="register-navbar" class="fontawesome fontawesome-edit" ng-click="toggleModalReg()" data-toggle="collapse" data-target="#myNav">Register</a> </li>
 
-                        <li><a href="" id="settings-navbar" class="entypo-tools" ng-click="toggleModalSettings()" data-toggle="collapse" data-target="#myNav">Settings</a></li>
+                        <li><a href="" id="settings-navbar" class="fontawesome fontawesome-cog" ng-click="toggleModalSettings()" data-toggle="collapse" data-target="#myNav">Settings</a></li>
 
-                        <li><a href="" id="editor-navbar" class="entypo-adjust" ng-click="toggleModalEdit()" data-toggle="collapse" data-target="#myNav">Image Editor</a></li>
+                        <li><a href="" id="editor-navbar" class="fontawesome fontawesome-tint" ng-click="toggleModalEdit()" data-toggle="collapse" data-target="#myNav">Image Editor</a></li>
 
-                        <li><a href="" id="upload-navbar" class="entypo-upload" ng-click="toggleModalUpload()" data-toggle="collapse" data-target="#myNav">Upload</a></li>
+                        <li><a href="" id="upload-navbar" class="fontawesome fontawesome-upload-alt" ng-click="toggleModalUpload()" data-toggle="collapse" data-target="#myNav">Upload</a></li>
 
-                        <li ng-hide="{{ logged }}"><a href="#" id="login-navbar" class="entypo-user" ng-click="toggleModalLogin()" data-toggle="collapse" data-target="#myNav">Log in</a> </li>
+                        <li ng-hide="{{ logged }}"><a href="#" id="login-navbar" class="fontawesome fontawesome-signin" ng-click="toggleModalLogin()" data-toggle="collapse" data-target="#myNav">Log in</a> </li>
 
-                        <li ng-show="{{ logged }}"><a href="#" id="account-navbar" class="entypo-box" data-toggle="collapse" data-target="#myNav" ng-click="toggleModalAccount()">My Account</a></li>
+                        <li ng-show="{{ logged }}"><a href="#" id="account-navbar" class="fontawesome fontawesome-user" data-toggle="collapse" data-target="#myNav" ng-click="toggleModalAccount()">My Account</a></li>
 
-                        <li ng-show="{{ logged }}"><a href="#" id="logout-navbar" class="entypo-logout" data-toggle="collapse" data-target="#myNav" ng-click="toggleModalLogout()">Log out</a></li>
+                        <li ng-show="{{ logged }}"><a href="#" id="logout-navbar" class="fontawesome fontawesome-signout" data-toggle="collapse" data-target="#myNav" ng-click="toggleModalLogout()">Log out</a></li>
                     </ul>
 
                 </div>
@@ -116,9 +120,9 @@
             <h4>My Account</h4>
             <button ng-click="toggleModalAccount()" type="button" class="close" data-dismiss="modal">&times;</button>
             <form role="form">
-                <div class="form-group">
+                <div>
                     <h4> This is your account page</h4>
-                    <p>{{testi}}</p>
+                    
                 </div>
             </form>
         </modal>

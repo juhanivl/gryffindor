@@ -17,6 +17,10 @@ angular.module('myApp')
                 templateUrl: 'views/videos.html',
                 controller: 'AjaxCtrl'
             })
+            .when('/search', {
+                templateUrl: 'views/search.html',
+                controller: 'AjaxCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });

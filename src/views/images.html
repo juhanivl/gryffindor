@@ -57,7 +57,7 @@
 
                     <img ng-src="{{getMediaUrl(file.path)}}" class="img-responsive center-block img-thumbnail" alt="image" ng-if="file.type === 'image'" ng-srcset="http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.small }} 180w, 
 					http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.medium }} 320w,
-					http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.large }} 640w">
+					http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.large }} 640w" ng-click="showCommentView(file.path,file.title,file.type,file.fileId)">
 
 
 
@@ -66,11 +66,9 @@
                     <p>{{file.fileId}}</p>
                     
                     
-                    <button class="btn btn-success" id={{file.fileId}} ng-click="likeFile(file.fileId)" ng-show="showLikeButton"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                    <button class="btn btn-success" id={{file.fileId}} ng-click="toggleLike(file.fileId)" ng-show="showLikeButton"><span class="fontawesome fontawesome-thumbs-up"></span></button>
 
-<button class="btn btn-danger" id={{file.fileId}} ng-click="unlikeFile(file.fileId)" ng-show="showDislikeButton"><span class="glyphicon glyphicon-thumbs-down"></span></button>
-
-<button class="btn btn-primary" ng-click="showCommentView(file.path,file.title,file.type,file.fileId)"><span class="glyphicon glyphicon-comment"></span>
+<button class="btn btn-primary" ng-click="showCommentView(file.path,file.title,file.type,file.fileId)"><span class="fontawesome fontawesome-comment"></span>
 </button>
                     
 

@@ -7,8 +7,55 @@ angular.module('myApp')
             }); */
             
             $scope.files = data;
+            
+            checkUserLikes();
         });
 
+    
+        var checkUserLikes = function () {
+            
+            var userId = localStorage.getItem("userId");
+            if (userId === null) {
+                console.log("not logged in");
+
+            } else {
+                var request = ajaxService.checkUserLikes(userId);
+
+                request.then(function (response) {
+                    $scope.filesUserLiked = response.data;
+
+                    for (var i = 0; i < response.data.length; i++) {
+                        document.getElementById(response.data[i].fileId).className="btn btn-success";
+                        //FILES USER HAS LIKED
+                        //console.log(response.data[i].fileId);
+                    }
+
+
+                }, function (error) {
+                    console.log(error.data);
+                });
+            }
+        };
+    
+        $scope.toggleLike = function (fileId) {
+            var userId = localStorage.getItem("userId");
+
+            if (userId === null) {
+
+                alert('Login to like');
+                //IF ALREADY LIKED CALL UNLIKE FUNCTION
+            } else if (document.getElementById(fileId).className === "btn btn-success") {
+                $scope.unlikeFile(fileId);
+                document.getElementById(fileId).className = "btn btn-default";
+
+                //IF ALREADY UNLIKED CALL LIKE FUNCTION
+            } else if (document.getElementById(fileId).className === "btn btn-default") {
+                $scope.likeFile(fileId);
+                document.getElementById(fileId).className = "btn btn-success";
+            } else {
+                console.log("error");
+            }
+        };
 
         $scope.showCommentView = function (path, title, type, fileId) {
             $scope.path = path;
@@ -24,6 +71,9 @@ angular.module('myApp')
 
             // open the View
             $scope.toggleModalImageView();
+            
+            //GET DESCRIPTION
+            getDescription($scope.fileId);
         };
 
 
@@ -103,10 +153,7 @@ angular.module('myApp')
     
     
     $scope.likeFile = function (fileId) {
-        
-        $scope.showLikeButton = !$scope.showLikeButton;
-        $scope.showDislikeButton = !$scope.showDislikeButton;
-        
+
         var userId = localStorage.getItem("userId");
         if (userId === null) {
                 alert('Login to like');
@@ -124,11 +171,7 @@ angular.module('myApp')
     };
     
         $scope.unlikeFile = function (fileId) {
-        
-        $scope.showDislikeButton = !$scope.showDislikeButton;
-        $scope.showLikeButton = !$scope.showLikeButton;
-        
-            
+           
         var userId = localStorage.getItem("userId");
         if (userId === null) {
                 alert('Login to unlike');
@@ -144,8 +187,20 @@ angular.module('myApp')
                 });
             }
     };
-  
-        
+    
+    //get description
+        var getDescription = function (fileId) {
+            var request = ajaxService.getDescription(fileId);
+            request.then(function (response) {
+                    $scope.description = response.data.description;
 
-   
+                    console.log("servicen jälkene: " + fileId);
+                    console.log(response.data);
+                },
+                function (error) {
+                    console.log(error.data);
+                });
+
+        };
+  
     });

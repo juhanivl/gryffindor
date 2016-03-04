@@ -71,20 +71,7 @@ var myApp = angular.module('myApp',['ngRoute']);
         };
         
     
-          $scope.testi = function () {
-          
-          var userId = localStorage.getItem('userId');
-            console.log(userId);
-        
-          var request = ajaxService.getUserById(userId);
-              request.then(function (response) {
-                    console.log(fileId,userId);
-                    console.log(response.data);
-                },
-                function (error) {
-                    console.log(error.data);
-                });
-            };
+         
 
     });
 

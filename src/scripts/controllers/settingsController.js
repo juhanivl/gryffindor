@@ -15,7 +15,9 @@ $scope.toggleTheme = function (theme, text) {
     document.getElementById("navbar").style.color = text;
     document.getElementById("hamburger").style.color = text;
     document.getElementById("body").style.color = text;
+    document.getElementById("imageViewModal").style.color = text;
     
+    document.getElementById("home-navbar").style.color = text;
     document.getElementById("image-navbar").style.color = text;
     document.getElementById("video-navbar").style.color = text;
     document.getElementById("audio-navbar").style.color = text;
@@ -26,7 +28,7 @@ $scope.toggleTheme = function (theme, text) {
     document.getElementById("login-navbar").style.color = text;
     document.getElementById("account-navbar").style.color = text;
     document.getElementById("logout-navbar").style.color = text;
-    
+    document.getElementById("commentdiv").style.color = 'black';
 };
     
 });
