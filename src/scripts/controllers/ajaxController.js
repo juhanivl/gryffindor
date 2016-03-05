@@ -2,18 +2,41 @@ angular.module('myApp')
     .controller('AjaxCtrl', function ($scope, ajaxService2, ajaxService, $sce) {
 
         ajaxService2.success(function (data) {
-           /* angular.forEach(data, function (item) {
-                item.path = "http://util.mw.metropolia.fi/uploads/" + item.path;
-            }); */
-            
+            /* angular.forEach(data, function (item) {
+                 item.path = "http://util.mw.metropolia.fi/uploads/" + item.path;
+             }); */
+
             $scope.files = data;
-            
+
+
+
             checkUserLikes();
+
+            //get files by user
+            getFilesByUser();
         });
 
-    
+//        $scope.filesShow = [];
+//        $scope.count = $scope.filesShow.length;
+//        $scope.loadMore = function () {
+//            var desiredPosts = 10;
+//            for (var i = $scope.count; i < desiredPosts; i++) {
+//                $scope.filesShow.push($scope.files[i]);
+//                console.log('add to filesShow: ' + $scope.files[i]);
+//            }
+//            console.log('filesShow: ' + $scope.filesShow);
+//        };
+
+        //
+        //        var initializeFilesShow = function () {
+        //            for (var i = 0; i < 10; i++) {
+        //                $scope.filesShow.push($scope.files[i]);
+        //            }
+        //        };
+
+
         var checkUserLikes = function () {
-            
+
             var userId = localStorage.getItem("userId");
             if (userId === null) {
                 console.log("not logged in");
@@ -25,7 +48,7 @@ angular.module('myApp')
                     $scope.filesUserLiked = response.data;
 
                     for (var i = 0; i < response.data.length; i++) {
-                        document.getElementById(response.data[i].fileId).className="btn btn-success";
+                        document.getElementById(response.data[i].fileId).className = "btn btn-success";
                         //FILES USER HAS LIKED
                         //console.log(response.data[i].fileId);
                     }
@@ -36,7 +59,9 @@ angular.module('myApp')
                 });
             }
         };
-    
+
+
+
         $scope.toggleLike = function (fileId) {
             var userId = localStorage.getItem("userId");
 
@@ -56,7 +81,6 @@ angular.module('myApp')
                 console.log("error");
             }
         };
-
         $scope.showCommentView = function (path, title, type, fileId) {
             $scope.path = path;
             $scope.title = title;
@@ -71,7 +95,7 @@ angular.module('myApp')
 
             // open the View
             $scope.toggleModalImageView();
-            
+
             //GET DESCRIPTION
             getDescription($scope.fileId);
         };
@@ -85,7 +109,7 @@ angular.module('myApp')
             //check if user is logged in
             if (userId === null) {
                 alert('Login to comment');
-                
+
             } else {
                 var data = {
                     user: userId,
@@ -129,7 +153,7 @@ angular.module('myApp')
 
         //get trusted resources
         $scope.getMediaUrl = function (url) {
-            return $sce.trustAsResourceUrl("http://util.mw.metropolia.fi/uploads/"+ url);
+            return $sce.trustAsResourceUrl("http://util.mw.metropolia.fi/uploads/" + url);
         };
 
 
@@ -146,49 +170,49 @@ angular.module('myApp')
                 });
 
         };
-    
 
-    $scope.showLikeButton = true;
-    $scope.showDislikeButton = false;
-    
-    
-    $scope.likeFile = function (fileId) {
 
-        var userId = localStorage.getItem("userId");
-        if (userId === null) {
+        $scope.showLikeButton = true;
+        $scope.showDislikeButton = false;
+
+
+        $scope.likeFile = function (fileId) {
+
+            var userId = localStorage.getItem("userId");
+            if (userId === null) {
                 alert('Login to like');
-                
+
             } else {
-        var request = ajaxService.likeFile(fileId,userId);
-            request.then(function (response) {
-                    console.log(fileId,userId);
-                    console.log(response.data);
-                },
-                function (error) {
-                    console.log(error.data);
-                });
+                var request = ajaxService.likeFile(fileId, userId);
+                request.then(function (response) {
+                        console.log(fileId, userId);
+                        console.log(response.data);
+                    },
+                    function (error) {
+                        console.log(error.data);
+                    });
             }
-    };
-    
+        };
+
         $scope.unlikeFile = function (fileId) {
-           
-        var userId = localStorage.getItem("userId");
-        if (userId === null) {
+
+            var userId = localStorage.getItem("userId");
+            if (userId === null) {
                 alert('Login to unlike');
-                
+
             } else {
-        var request = ajaxService.unlikeFile(fileId,userId);
-            request.then(function (response) {
-                    console.log(fileId,userId);
-                    console.log(response.data);
-                },
-                function (error) {
-                    console.log(error.data);
-                });
+                var request = ajaxService.unlikeFile(fileId, userId);
+                request.then(function (response) {
+                        console.log(fileId, userId);
+                        console.log(response.data);
+                    },
+                    function (error) {
+                        console.log(error.data);
+                    });
             }
-    };
-    
-    //get description
+        };
+
+        //get description
         var getDescription = function (fileId) {
             var request = ajaxService.getDescription(fileId);
             request.then(function (response) {
@@ -202,5 +226,19 @@ angular.module('myApp')
                 });
 
         };
-  
+
+        //get user's files
+
+        var getFilesByUser = function () {
+            var userId = localStorage.getItem('userId');
+            console.log(userId);
+            var request = ajaxService.getFilesByUser(userId);
+            request.then(function (response) {
+                $scope.userFiles = response.data;
+                console.log('files by user: ' + response);
+            }, function (error) {
+                console.log(error.data);
+            });
+        };
+
     });

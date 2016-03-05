@@ -41,7 +41,7 @@ angular.module('myApp')
                 }
             });
         };
-    
+
         ajaxFunctions.getDescription = function (args) {
             console.log(args);
             return $http.get('http://util.mw.metropolia.fi/ImageRekt/api/v2/file/' + args);
@@ -54,15 +54,15 @@ angular.module('myApp')
 
         ajaxFunctions.search = function (args) {
             console.log(args);
-            return $http.post("http://util.mw.metropolia.fi/ImageRekt/api/v2/files/search/title/" , $httpParamSerializer(args), {
+            return $http.post("http://util.mw.metropolia.fi/ImageRekt/api/v2/files/search/title/", $httpParamSerializer(args), {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
         };
-    
+
         ajaxFunctions.checkUserLikes = function (userId) {
-          return $http.get(urlBase+"likes/user/"+ userId);
+            return $http.get(urlBase + "likes/user/" + userId);
         };
 
         ajaxFunctions.likeFile = function (fileId, userId) {
@@ -73,6 +73,14 @@ angular.module('myApp')
             return $http.get('http://util.mw.metropolia.fi/ImageRekt/api/v2/unlike/' + fileId + "/" + userId);
         };
 
+        ajaxFunctions.getFilesByUser = function (userId) {
+            return $http.get(urlBase + 'files/user/' + userId);
+        };
+    
+        ajaxFunctions.getFiles = function() {
+            return $http.get('http://util.mw.metropolia.fi/ImageRekt/api/v2/files');
+        };
+        
         return ajaxFunctions;
 
 

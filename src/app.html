@@ -67,11 +67,11 @@
 
                         <li><a href="" id="upload-navbar" class="fontawesome fontawesome-upload-alt" ng-click="toggleModalUpload()" data-toggle="collapse" data-target="#myNav">Upload</a></li>
 
-                        <li ng-hide="{{ logged }}"><a href="#" id="login-navbar" class="fontawesome fontawesome-signin" ng-click="toggleModalLogin()" data-toggle="collapse" data-target="#myNav">Log in</a> </li>
+                        <li ng-hide="{{ logged }}"><a href="" id="login-navbar" class="fontawesome fontawesome-signin" ng-click="toggleModalLogin()" data-toggle="collapse" data-target="#myNav">Log in</a> </li>
 
-                        <li ng-show="{{ logged }}"><a href="#" id="account-navbar" class="fontawesome fontawesome-user" data-toggle="collapse" data-target="#myNav" ng-click="toggleModalAccount()">My Account</a></li>
+                        <li ng-show="{{ logged }}"><a href="#myFiles" id="account-navbar" class="fontawesome fontawesome-user" data-toggle="collapse" data-target="#myNav" ng-click="toggleModalAccount()">My Account</a></li>
 
-                        <li ng-show="{{ logged }}"><a href="#" id="logout-navbar" class="fontawesome fontawesome-signout" data-toggle="collapse" data-target="#myNav" ng-click="toggleModalLogout()">Log out</a></li>
+                        <li ng-show="{{ logged }}"><a href="" id="logout-navbar" class="fontawesome fontawesome-signout" data-toggle="collapse" data-target="#myNav" ng-click="toggleModalLogout()">Log out</a></li>
                     </ul>
 
                 </div>
@@ -111,6 +111,7 @@
 
 
         <!-- MyAccount modal -->
+<!--
         <modal title="My Account" id="accountModal" ng-show="showModalAccount">
             <h4>My Account</h4>
             <button ng-click="toggleModalAccount()" type="button" class="close" data-dismiss="modal">&times;</button>
@@ -121,6 +122,7 @@
                 </div>
             </form>
         </modal>
+-->
 
         <!-- SEARCH MODAL -->
             
