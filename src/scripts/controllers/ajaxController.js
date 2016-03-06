@@ -16,16 +16,18 @@ angular.module('myApp')
             getFilesByUser();
         });
 
-//        $scope.filesShow = [];
-//        $scope.count = $scope.filesShow.length;
-//        $scope.loadMore = function () {
-//            var desiredPosts = 10;
-//            for (var i = $scope.count; i < desiredPosts; i++) {
-//                $scope.filesShow.push($scope.files[i]);
-//                console.log('add to filesShow: ' + $scope.files[i]);
-//            }
-//            console.log('filesShow: ' + $scope.filesShow);
-//        };
+        $scope.filesShow = [];
+        $scope.count = 0;
+    
+        $scope.loadMore = function () {
+            var desiredPosts = 10;
+            for (var i = $scope.count; i < desiredPosts; i++) {
+                $scope.filesShow.push($scope.files[i]);
+                console.log('add to filesShow: ' + $scope.files[i]);
+            }
+            $scope.count += 10;
+            console.log('filesShow: ' + $scope.filesShow);
+        };
 
         //
         //        var initializeFilesShow = function () {
