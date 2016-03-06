@@ -6,7 +6,6 @@
         <div>
             <button ng-click="toggleModalImageView()" type="button" class="close" data-dismiss="modal">&times;</button>
             <h4>&nbsp; &nbsp; {{title}}</h4>
-            <!--img ng-src="{{path}}" class="img-responsive center-block img-thumbnail" alt="image"-->
 
             <img ng-src="{{getMediaUrl(path)}}" class="img-responsive center-block img-thumbnail" alt="image" ng-if="type === 'image'">
 
@@ -24,10 +23,9 @@
 
                 <div id="commentBubble" class="panel panel-default" ng-repeat="comment in comments">
 
-                    <!--<div class="panel-body" id="commentbubble">-->
                     <p>&nbsp;<b>{{comment.username}}</b>&nbsp; &nbsp; <i>{{comment.time}}</i></p>
                     <p>&nbsp;{{comment.comment}}</p>
-                    <!--</div>-->
+                
                 </div>
                 <hr>
             </div>
@@ -35,7 +33,7 @@
 
         <!--LEAVE A COMMENT-->
         <div class="col-md-3 col-sm-6" id="leavecomment">
-            <!--LEAVEÂ COMMENT-->
+            <!--LEAVE COMMENT-->
             <form role="form" id="commentForm" enctype="application/x-www-form-urlencoded">
                 <textarea class="form-control" rows="2" id="commentField" placeholder="Write your comment here" ng-model="cmt"></textarea>
                 <button id="commentButton" type="button" class="btn btn-primary btn-sm" ng-click="addComment()">Comment</button>
@@ -55,14 +53,10 @@
 
                     <h4><b> &nbsp; &nbsp; {{file.title}}</b></h4>
 
-                    <!--img ng-src="{{getMediaUrl(file.path)}}" class="img-responsive center-block img-thumbnail" alt="image" ng-if="file.title === '{{search}}'" ng-srcset="http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.small }} 180w, 
+                    <img ng-src="{{getMediaUrl(file.path)}}" class="img-responsive center-block img-thumbnail" alt="image" ng-if="file.type === 'image'" ng-srcset="http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.small }} 180w, 
 					http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.medium }} 320w,
-					http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.large }} 640w"-->
+					http://util.mw.metropolia.fi/uploads/{{ file.thumbNails.large }} 640w">
 
-
-
-                    <!--                        <p>&nbsp; &nbsp; &nbsp;{{rating}}</p>-->
-                    <!--                        <p>This is images url: {{ file.path }}</p>-->
                     <p>{{file.fileId}}</p>
                     
                     
@@ -76,7 +70,7 @@
 
                     <div id="socialmedia" class="pull-right">
                         <!-- twitter -->
-                        <a href="{{twitterlink}}" title="Share on Twitter" target="_blank" class="brandico-twitter-bird"><i class="fa fa-twitter"></i>Twitter</a>
+                        <a href="https://twitter.com/share?url={{file.path}}"title="Share on Twitter" target="_blank" class="brandico-twitter-bird"><i class="fa fa-twitter"></i>Twitter</a>
                         <!-- Facebook -->
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{file.path}}" title="Share on Facebook" target="_blank" class="brandico-facebook-rect"><i class="fa fa-facebook"></i> Facebook</a>
                         <!-- Google+ -->

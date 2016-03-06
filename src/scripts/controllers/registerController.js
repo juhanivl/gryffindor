@@ -4,6 +4,8 @@ angular.module('myApp')
     
     $scope.showSuccess= false;
     $scope.showFail = false;
+    
+        //Register
 
         $scope.register = function () {
             

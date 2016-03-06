@@ -26,12 +26,7 @@
             <div class="container-fluid">
                 <div class="navbar-header">
 
-    <!-- SEARCH BUTTON --->
-                    
-                    <!--div ng-controller="SearchController" class="pull-right">
-
-</div-->
-                     
+                                         
                     
 <!-- HAMBURGER MENU-->
 <button type="button" id="hamburger" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#myNav" ng-click="toggleAllModals()">
@@ -109,20 +104,6 @@
             </div>
         </modal>
 
-
-        <!-- MyAccount modal -->
-<!--
-        <modal title="My Account" id="accountModal" ng-show="showModalAccount">
-            <h4>My Account</h4>
-            <button ng-click="toggleModalAccount()" type="button" class="close" data-dismiss="modal">&times;</button>
-            <form role="form">
-                <div>
-                    <h4> This is your account page</h4>
-                    
-                </div>
-            </form>
-        </modal>
--->
 
         <!-- SEARCH MODAL -->
             
@@ -243,7 +224,7 @@
 
 <!-- Settings modal -->
         <modal title="Settings" id="settingsModal" ng-show="showModalSettings">
-            <!--TODO: EO TOIMI<button ng-click="toggleModalSettings()" type="button" class="close">x</button>-->
+           <button ng-click="toggleModalSettings()" type="button" class="close" data-dismiss="modal">&times;</button>
             <h4>Settings</h4>
             <div class="row" ng-controller="settingsController">
                 <div class="col-md-6">
@@ -267,24 +248,11 @@
 
     </div>
     </div>
-    <!--NAVBAR-->
 
-    <!--MODALS-->
-    <!--UPLOAD MEDIA-->
-
-    <!--MODAL-->
-
-    <!---CONTENT-->
 
 <div class="container-fluid">
     <div ng-view=""></div>
 </div>
-
-
-
-    <!--CONTENT-->
-
-
 
 
 

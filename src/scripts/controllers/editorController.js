@@ -16,7 +16,8 @@ angular.module('myApp')
             $scope.image.onload = $scope.resetImage;
         };
 
-        //TODO: FILTER NAMES
+        //Initializing the picture
+    
         $scope.init = function () {
             // initialize default values for variables
             $scope.brightness = 0;
@@ -81,8 +82,6 @@ angular.module('myApp')
         $scope.resetImage = function () {
             // when image data is loaded, (after onload)
             // set size of canvas to match image size
-            //$scope.canvas.height = $scope.image.height;
-            //$scope.canvas.width = $scope.image.width;
 
             // put the data into canvas element
             $scope.ctx.drawImage($scope.image, 0, 0, $scope.canvas.width = $scope.image.width, $scope.canvas.height = $scope.image.height);
@@ -150,6 +149,8 @@ angular.module('myApp')
                 $scope.pixels[i * 4 + 2] = $scope.pixels[i * 4 + 2] + filters[value].blue * $scope.strength / 100; // Blue
             }
         };
+    
+        //Function that changes dataURI to Blob
 
         function dataURItoBlob(dataURI) {
             // convert base64/URLEncoded data component to raw binary data held in a string
@@ -214,6 +215,7 @@ angular.module('myApp')
             $scope.ctx.fillText(lowerText, x2, y2);
         };
 
+        //Upload edited image function
 
         $scope.sendImage = function () {
             var fd = new FormData(document.getElementById('upload'));

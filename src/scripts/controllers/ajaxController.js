@@ -2,38 +2,17 @@ angular.module('myApp')
     .controller('AjaxCtrl', function ($scope, ajaxService2, ajaxService, $sce) {
 
         ajaxService2.success(function (data) {
-            /* angular.forEach(data, function (item) {
-                 item.path = "http://util.mw.metropolia.fi/uploads/" + item.path;
-             }); */
 
             $scope.files = data;
-
-
 
             checkUserLikes();
 
             //get files by user
             getFilesByUser();
         });
-
-//        $scope.filesShow = [];
-//        $scope.count = $scope.filesShow.length;
-//        $scope.loadMore = function () {
-//            var desiredPosts = 10;
-//            for (var i = $scope.count; i < desiredPosts; i++) {
-//                $scope.filesShow.push($scope.files[i]);
-//                console.log('add to filesShow: ' + $scope.files[i]);
-//            }
-//            console.log('filesShow: ' + $scope.filesShow);
-//        };
-
-        //
-        //        var initializeFilesShow = function () {
-        //            for (var i = 0; i < 10; i++) {
-        //                $scope.filesShow.push($scope.files[i]);
-        //            }
-        //        };
-
+    
+    
+        //Checks user likes
 
         var checkUserLikes = function () {
 
@@ -49,8 +28,6 @@ angular.module('myApp')
 
                     for (var i = 0; i < response.data.length; i++) {
                         document.getElementById(response.data[i].fileId).className = "btn btn-success";
-                        //FILES USER HAS LIKED
-                        //console.log(response.data[i].fileId);
                     }
 
 
@@ -60,7 +37,7 @@ angular.module('myApp')
             }
         };
 
-
+        //Toggle like function
 
         $scope.toggleLike = function (fileId) {
             var userId = localStorage.getItem("userId");
@@ -81,6 +58,9 @@ angular.module('myApp')
                 console.log("error");
             }
         };
+    
+        //Show comment view    
+    
         $scope.showCommentView = function (path, title, type, fileId) {
             $scope.path = path;
             $scope.title = title;
@@ -102,6 +82,7 @@ angular.module('myApp')
 
 
         //add Comment function
+    
         $scope.addComment = function () {
             var userId = localStorage.getItem("userId");
             var userName;
@@ -175,6 +156,7 @@ angular.module('myApp')
         $scope.showLikeButton = true;
         $scope.showDislikeButton = false;
 
+        //Like a file function
 
         $scope.likeFile = function (fileId) {
 
@@ -194,6 +176,8 @@ angular.module('myApp')
             }
         };
 
+        //Unlike a file function
+    
         $scope.unlikeFile = function (fileId) {
 
             var userId = localStorage.getItem("userId");

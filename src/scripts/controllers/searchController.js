@@ -1,6 +1,8 @@
 angular.module('myApp')
     .controller('SearchController', function ($scope, ajaxService) {
      
+    //Search
+    
     $scope.search = function () {
             
             var data = {
