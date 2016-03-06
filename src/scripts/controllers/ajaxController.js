@@ -2,39 +2,57 @@ angular.module('myApp')
     .controller('AjaxCtrl', function ($scope, ajaxService2, ajaxService, $sce) {
 
         ajaxService2.success(function (data) {
-            /* angular.forEach(data, function (item) {
-                 item.path = "http://util.mw.metropolia.fi/uploads/" + item.path;
-             }); */
 
+            //$scope.files = data;
+            console.log('initialize files');
             $scope.files = data;
+            $scope.images = [];
 
+            angular.forEach(data, function (item) {
+                if (item.type === 'image') {
+                    $scope.images.push(item);
+                }
+            });
 
+            //get files by user and check which files user has liked
+            if (localStorage.getItem('userId') !== null) {
+                checkUserLikes();
+                getFilesByUser();
+            }
 
-            checkUserLikes();
-
-            //get files by user
-            getFilesByUser();
         });
 
+        console.log('initialize shows');
         $scope.filesShow = [];
+        $scope.imagesShow = [];
         $scope.count = 0;
-    
-        $scope.loadMore = function () {
+
+        $scope.loadMore = function (origin, show) {
             var desiredPosts = 10;
-            for (var i = $scope.count; i < desiredPosts; i++) {
-                $scope.filesShow.push($scope.files[i]);
-                console.log('add to filesShow: ' + $scope.files[i]);
+
+            for (var i = $scope.count; i < desiredPosts + $scope.count; i++) {
+                show.push(origin[i]);
+                console.log('add to filesShow: ' + origin[i]);
+
             }
-            $scope.count += 10;
-            console.log('filesShow: ' + $scope.filesShow);
+
+            $scope.count = show.length;
+            console.log('count: ' + $scope.count);
+            console.log('show: ' + show.length);
+            console.log('origin: ' + origin.length);
         };
 
-        //
-        //        var initializeFilesShow = function () {
-        //            for (var i = 0; i < 10; i++) {
-        //                $scope.filesShow.push($scope.files[i]);
-        //            }
-        //        };
+
+//        var initializeFilesShow = function (origin, show) {
+//            for (var i = 0; i < 10; i++) {
+//                show.push(origin[i]);
+//            }
+//        };
+
+
+
+
+        //Checks user likes
 
 
         var checkUserLikes = function () {
@@ -51,8 +69,6 @@ angular.module('myApp')
 
                     for (var i = 0; i < response.data.length; i++) {
                         document.getElementById(response.data[i].fileId).className = "btn btn-success";
-                        //FILES USER HAS LIKED
-                        //console.log(response.data[i].fileId);
                     }
 
 
@@ -62,7 +78,7 @@ angular.module('myApp')
             }
         };
 
-
+        //Toggle like function
 
         $scope.toggleLike = function (fileId) {
             var userId = localStorage.getItem("userId");
@@ -83,6 +99,9 @@ angular.module('myApp')
                 console.log("error");
             }
         };
+
+        //Show comment view    
+
         $scope.showCommentView = function (path, title, type, fileId) {
             $scope.path = path;
             $scope.title = title;
@@ -104,6 +123,7 @@ angular.module('myApp')
 
 
         //add Comment function
+
         $scope.addComment = function () {
             var userId = localStorage.getItem("userId");
             var userName;
@@ -177,6 +197,7 @@ angular.module('myApp')
         $scope.showLikeButton = true;
         $scope.showDislikeButton = false;
 
+        //Like a file function
 
         $scope.likeFile = function (fileId) {
 
@@ -195,6 +216,8 @@ angular.module('myApp')
                     });
             }
         };
+
+        //Unlike a file function
 
         $scope.unlikeFile = function (fileId) {
 
@@ -238,6 +261,25 @@ angular.module('myApp')
             request.then(function (response) {
                 $scope.userFiles = response.data;
                 console.log('files by user: ' + response);
+            }, function (error) {
+                console.log(error.data);
+            });
+        };
+
+        //search files
+
+        $scope.search = function () {
+            var data = {
+                title: $scope.title
+            };
+            console.log(data);
+            var request = ajaxService.search(data);
+
+            request.then(function (response) {
+                console.log(response.data);
+                document.getElementById('searchForm').reset();
+                $scope.searchResults = response.data;
+
             }, function (error) {
                 console.log(error.data);
             });

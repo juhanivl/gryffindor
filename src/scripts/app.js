@@ -3,6 +3,8 @@ var myApp = angular.module('myApp',['ngRoute']);
 
     myApp.controller('myCtrl', function ($scope, $http, ajaxService) {
 
+        //Modals are first preset to false
+        
         $scope.showModalReg = false;
         $scope.showModalLogin = false;
         $scope.showModalUpload = false;
@@ -11,6 +13,8 @@ var myApp = angular.module('myApp',['ngRoute']);
         $scope.showModalEdit = false;
         $scope.showModalAccount = false;
         $scope.showModalSearch = false;
+        
+        //Toggling modals
 
         $scope.toggleModalReg = function () {
             $scope.showModalReg = !$scope.showModalReg;
@@ -69,6 +73,8 @@ var myApp = angular.module('myApp',['ngRoute']);
         } else {
             $scope.logged = true;
         }
+        
+        //Toggle modal logout
 
         $scope.toggleModalLogout = function () {
             
